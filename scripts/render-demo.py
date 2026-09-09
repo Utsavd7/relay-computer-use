@@ -6,16 +6,16 @@ import asyncio, subprocess, json, argparse, textwrap
 import edge_tts
 folder=Path('work/demo'); folder.mkdir(parents=True,exist_ok=True)
 chapters=[
-(0.7,10,"Here's Relay. The idea is simple: let a model figure out a workflow once, then run it again without asking the model."),
-(10.5,25,"Let's start with discovery. I'm asking a local model to find a member's savings balance. It reads the screen, chooses an allowed action, and checks what happens next."),
-(25.5,43,"You can follow the steps here. Search for the member, open their account, then read the balance. Relay checks the member's identity and the final screen before it saves anything as a successful workflow."),
-(43.5,56,"Here's what gets saved: a capability with inputs, outputs, and the exact steps to repeat. You can inspect it, export it, and test it before approving it."),
-(56.5,69,"Now let's try a different member. Same capability, new input. The saved steps run against the actual interface. And here, you can see it used no model calls."),
-(69.5,79,"What if the member doesn't exist? Relay returns a clear, known outcome. It doesn't crash, or pretend the task succeeded."),
-(79.5,90,"Now the session has expired. Relay pauses and tells me where it stopped. I can take over this same session, with all the context still there."),
-(90.5,100,"I'll restore the session and hand control back. Relay picks up from the interrupted step. The timeline keeps a record of that handoff."),
-(100.5,111,"This also works with a second institution. The interface is slightly different, but an explicit override lets us reuse the same capability."),
-(111.5,120,"And every run leaves evidence you can inspect. That's Relay: learn the workflow, keep the contract, and stay in control."),
+(0.3,9.1,"Here's Relay. The idea is simple: let a model figure out a workflow once, then run it again without asking the model."),
+(9.25,20.6,"Let's start with discovery. I'm asking a local model to find a member's savings balance. It reads the screen, chooses an allowed action, and checks what happens next."),
+(20.75,34,"You can follow the steps here. Search for the member, open their account, then read the balance. Relay checks the member's identity and the final screen before it saves anything as a successful workflow."),
+(34.15,45.5,"Here's what gets saved: a capability with inputs, outputs, and the exact steps to repeat. You can inspect it, export it, and test it before approving it."),
+(45.65,57,"Now let's try a different member. Same capability, new input. The saved steps run against the actual interface. And here, you can see it used no model calls."),
+(57.15,65.5,"What if the member doesn't exist? Relay returns a clear, known outcome. It doesn't crash, or pretend the task succeeded."),
+(65.65,75.2,"Now the session has expired. Relay pauses and tells me where it stopped. I can take over this same session, with all the context still there."),
+(75.35,84,"I'll restore the session and hand control back. Relay picks up from the interrupted step. The timeline keeps a record of that handoff."),
+(84.15,93.7,"This also works with a second institution. The interface is slightly different, but an explicit override lets us reuse the same capability."),
+(94,105,"And every run leaves evidence you can inspect. That's Relay: learn the workflow, keep the contract, and stay in control."),
 ]
 voice='en-US-AndrewMultilingualNeural'
 async def narrate():
@@ -45,7 +45,7 @@ for i,(start,end,text) in enumerate(chapters):
  tempo=max(1,length/(end-start-.12))
  if tempo>1.18:raise ValueError(f'Chapter {i} is too long for natural delivery: {length}s. Shorten the script.')
  actual=length/tempo;timings.append({'chapter':i+1,'start':start,'duration':actual,'tempo':tempo})
- filters.append(f'[{i+offset}:a]atempo={tempo:.5f},afade=t=in:d=0.035,afade=t=out:st={max(0,actual-.07):.4f}:d=0.07,adelay={round(start*1000)}|{round(start*1000)},apad=whole_dur=120[a{i}]');streams.append(f'[a{i}]')
+ filters.append(f'[{i+offset}:a]atempo={tempo:.5f},afade=t=in:d=0.035,afade=t=out:st={max(0,actual-.07):.4f}:d=0.07,adelay={round(start*1000)}|{round(start*1000)},apad=whole_dur=105[a{i}]');streams.append(f'[a{i}]')
  # Sentence-length subtitles follow the spoken chapter without covering whole paragraphs.
  sentences=text.replace('? ', '?|').replace('. ', '.|').split('|');cursor=start;total=sum(len(s) for s in sentences)
  for sentence in sentences:
@@ -54,7 +54,7 @@ for i,(start,end,text) in enumerate(chapters):
 filters.append(''.join(streams)+f'amix=inputs={len(chapters)}:normalize=0:duration=longest,loudnorm=I=-16:TP=-1.5:LRA=9[audio]')
 command+=['-filter_complex',';'.join(filters)]
 if not options.audio_only:command+=['-map','0:v']
-command+=['-map','[audio]','-t','120']
+command+=['-map','[audio]','-t','105']
 if options.audio_only:command+=['-c:a','libmp3lame','-b:a','192k',str(folder/'narration.mp3')]
 else:command+=['-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart','public/demo.mp4']
 subprocess.run(command,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)

@@ -7,10 +7,13 @@
 
 [![Relay — the execution loop](public/demo-poster.jpg)](https://utsavd7.github.io/relay-computer-use/)
 
+Color definitions are shared across the landing page, workspace, and embedded training UI. See [the color system](docs/COLORS.md) and [demo reproduction](docs/DEMO.md).
+
 ## Try it
 
 - **Public app:** https://utsavd7.github.io/relay-computer-use/
-- **Walkthrough:** the landing page embeds a two-minute recording, with English captions.
+- **Walkthrough:** the landing page embeds a 4K recording lasting 1:45, with conversational neural narration and English captions.
+- **Requirements audit:** [Every core requirement, optional extension and deliverable](docs/REQUIREMENTS.md)
 - **Design:** [REPORT.md](REPORT.md)
 - **Evidence:** [evidence/](evidence/) — real discovery, replay, exceptional outcomes, handoff, and stability results.
 

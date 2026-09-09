@@ -1,6 +1,6 @@
 # Relay implementation scope
 
-All Section 3 requirements, all six stretch goals, public no-login landing/workbench, two-minute real-UI walkthrough, README, seven-section REPORT, authentic discovery/replay evidence, GitHub and hosting.
+All Section 3 requirements, all six stretch goals, public no-login landing/workbench, 1:45 real-UI walkthrough in 4K, README, seven-section REPORT, authentic discovery/replay evidence, GitHub and hosting.
 
 Architecture: a typed TypeScript interpreter shared by browser workbench and Playwright CLI. BrowserSurface reads/acts on a same-origin legacy-style nested iframe; the target exposes no automation API. Discovery gets redacted observations and returns constrained actions. Free WebLLM handles hosted discovery; free local MLX or Ollama handles CLI discovery. No remote database: explicitly device-local browser storage plus portable artifact/evidence downloads.
 

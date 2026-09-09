@@ -6,8 +6,8 @@ await mkdir('work/demo', { recursive: true });
 const artifact = JSON.parse(await readFile('evidence/capability.json', 'utf8'));
 const browser = await chromium.launch();
 const context = await browser.newContext({
-  viewport: { width: 1440, height: 960 },
-  recordVideo: { dir: 'work/demo', size: { width: 1440, height: 960 } },
+  viewport: { width: 3840, height: 2160 },
+  recordVideo: { dir: 'work/demo', size: { width: 3840, height: 2160 } },
 });
 const page = await context.newPage();
 const exchanges: any[] = [];
@@ -39,6 +39,12 @@ await page.addInitScript(() => {
   (window as any).relayModelName = 'Qwen3-4B-Instruct-2507 · local MLX';
 });
 const base = process.env.RELAY_URL || 'http://localhost:3000/';
+await page.addInitScript(() => {
+  if (window === window.top)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.zoom = '2';
+    });
+});
 await page.goto(base);
 await page.locator('.hero h1').waitFor();
 const started = Date.now();
@@ -53,10 +59,10 @@ async function chapter(number: string, title: string) {
       const el = document.createElement('div');
       el.id = 'recording-caption';
       el.style.cssText =
-        'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:15px;align-items:center;padding:12px 21px;border-radius:8px;background:#1c2a1ded;color:white;font:13px DM Sans, sans-serif;box-shadow:0 8px 35px #0e1b0c30;pointer-events:none';
+        'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:15px;align-items:center;padding:12px 21px;border-radius:8px;background:color-mix(in srgb,var(--relay-ink) 94%,transparent);color:var(--relay-on-dark);font:13px DM Sans, sans-serif;box-shadow:0 8px 35px #0e1b0c30;pointer-events:none';
       const n = document.createElement('span');
       n.textContent = number;
-      n.style.cssText = 'color:#b9f3c8;font:11px monospace';
+      n.style.cssText = 'color:var(--relay-mint);font:11px monospace';
       const t = document.createElement('span');
       t.textContent = title;
       el.appendChild(n);
@@ -68,17 +74,17 @@ async function chapter(number: string, title: string) {
 }
 try {
   await chapter('RELAY', 'Discover a workflow. Make it repeatable.');
-  await at(10);
+  await at(9.1);
   await page
     .getByRole('button', { name: 'Open the workbench', exact: true })
     .click();
   await page.waitForFunction(() => !!(window as any).relay);
   await page.evaluate(() => {
-    document.body.style.zoom = '0.8';
+    document.body.style.zoom = '2';
   });
   await chapter('01 / DISCOVERY', 'A real local model operates the live UI');
   await page.getByRole('tab', { name: 'Discover', exact: true }).click();
-  await at(18);
+  await at(13);
   const discovery = await page.evaluate(() =>
     (window as any).relay.discover({ member_id: '12345' }, { noHuman: true }),
   );
@@ -88,13 +94,13 @@ try {
     'work/demo/discovery.json',
     JSON.stringify(redact(discovery), null, 2),
   );
-  await at(43);
+  await at(34);
   await page.getByRole('button', { name: 'Capabilities', exact: true }).click();
   await chapter(
     '02 / ARTIFACT',
     'Typed inputs, declared outputs, reviewable steps',
   );
-  await at(56);
+  await at(45.5);
   await page.getByRole('button', { name: 'Workbench', exact: true }).click();
   await page.getByRole('tab', { name: 'Replay', exact: true }).click();
   await page.getByLabel('Member ID', { exact: true }).fill('67890');
@@ -112,7 +118,7 @@ try {
     artifact,
   );
   if (replay.result.status !== 'success') throw Error('Replay failed');
-  await at(69);
+  await at(57);
   await page.getByLabel('Member ID', { exact: true }).fill('99999');
   await chapter('04 / OUTCOMES', 'Member not found is a business outcome');
   await page.evaluate(
@@ -124,7 +130,7 @@ try {
       ),
     artifact,
   );
-  await at(79);
+  await at(65.5);
   await page.getByLabel('Member ID', { exact: true }).fill('12345');
   await page
     .getByLabel('Runtime condition', { exact: true })
@@ -143,19 +149,19 @@ try {
     artifact,
   );
   await page.locator('.intervention').waitFor({ timeout: 15000 });
-  await at(90);
+  await at(75.2);
   await page
     .frameLocator('iframe[title="Live banking session"]')
     .frameLocator('iframe')
     .getByRole('button', { name: 'Restore session' })
     .evaluate((element) => (element as HTMLButtonElement).click());
-  await at(94);
+  await at(78.6);
   await page
     .getByRole('button', { name: 'Return control', exact: true })
     .click();
   const handed = await takeover;
   if (handed.result.status !== 'success') throw Error('Handoff failed');
-  await at(100);
+  await at(84);
   await page.getByLabel('Institution', { exact: true }).selectOption('harbor');
   await page
     .getByLabel('Runtime condition', { exact: true })
@@ -170,13 +176,13 @@ try {
       ),
     artifact,
   );
-  await at(111);
+  await at(93.7);
   await page.getByRole('button', { name: 'Evidence', exact: true }).click();
   await chapter(
     'RELAY',
     'Every action. Every outcome. Evidence you can inspect.',
   );
-  await at(120);
+  await at(105);
   await writeFile(
     'work/demo/model-exchanges.json',
     JSON.stringify(exchanges, null, 2),

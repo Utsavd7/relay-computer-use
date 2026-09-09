@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-09T15:16:32.299Z",
+  "timestamp": "2026-09-09T15:35:18.960Z",
   "checks": [
     {
       "name": "replay",
@@ -123,6 +123,13 @@
       "code": "OK",
       "model_calls": 0,
       "assisted": false
+    },
+    {
+      "name": "assisted-recovery",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 1,
+      "assisted": true
     },
     {
       "name": "risky-action-blocked",

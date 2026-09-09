@@ -1,0 +1,46 @@
+{
+  "minimum_text_contrast": 4.5,
+  "shared_button_color": "rgb(34, 93, 70)",
+  "checks": [
+    {
+      "view": "landing",
+      "violations": []
+    },
+    {
+      "view": "workbench",
+      "violations": []
+    },
+    {
+      "view": "embedded banking session",
+      "violations": []
+    },
+    {
+      "view": "Capabilities",
+      "violations": []
+    },
+    {
+      "view": "Evidence",
+      "violations": []
+    },
+    {
+      "view": "Policy",
+      "violations": []
+    },
+    {
+      "view": "success",
+      "violations": []
+    },
+    {
+      "view": "known outcome",
+      "violations": []
+    },
+    {
+      "view": "failure",
+      "violations": []
+    },
+    {
+      "view": "human intervention",
+      "violations": []
+    }
+  ]
+}

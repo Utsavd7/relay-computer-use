@@ -73,7 +73,7 @@ export default function Landing({ open }: { open: () => void }) {
         <nav aria-label="Main navigation">
           <a href="#how">The system</a>
           <a href="#demo">
-            Walkthrough <span>02:00</span>
+            Walkthrough <span>01:45</span>
           </a>
           <a href={source} target="_blank" rel="noreferrer">
             GitHub <ArrowUpRight size={13} />
@@ -117,7 +117,7 @@ export default function Landing({ open }: { open: () => void }) {
             <span className="play-circle">
               <Play size={12} fill="currentColor" />
             </span>
-            See it in 2 minutes
+            Watch the 1:45 demo
           </a>
           <span className="hero-access">No sign-in. Runs in your browser.</span>
         </div>
@@ -338,11 +338,11 @@ export default function Landing({ open }: { open: () => void }) {
             </h2>
           </div>
           <p>
-            Watch discovery, replay, and a human handoff in one two-minute
+            Watch discovery, replay, and a human handoff in one 1:45
             walkthrough.
           </p>
           <span className="demo-duration">
-            02:00 <Play size={14} fill="currentColor" />
+            01:45 <Play size={14} fill="currentColor" />
           </span>
         </div>
         <div className="video-shell">
@@ -351,7 +351,7 @@ export default function Landing({ open }: { open: () => void }) {
             controls
             preload="metadata"
             playsInline
-            aria-label="Relay two-minute product walkthrough"
+            aria-label="Relay 4K product walkthrough, one minute forty-five seconds"
           >
             <source src="demo.mp4" type="video/mp4" />
             <track

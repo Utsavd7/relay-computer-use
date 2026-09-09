@@ -2,7 +2,7 @@
 
 ## Five-minute review path
 
-1. Open the public landing page and watch the two-minute product demo.
+1. Open the public landing page and watch the 1:45 product demo in 4K.
 2. Open the workbench; replay member `67890` and inspect the verified result and zero model decisions.
 3. Replay `99999`: observe a known business outcome rather than a crash.
 4. Select the session-expiry condition, replay, restore the existing session manually, and return control. The timeline records ownership transfer and the human action.
@@ -31,7 +31,7 @@ https://github.com/Utsavd7/relay-computer-use
 
 Live demo: https://utsavd7.github.io/relay-computer-use/
 
-The repository includes setup instructions, the design report, genuine local-model discovery evidence, deterministic replay evidence, runtime error handling, live-session handoff, and the optional extensions. The landing page includes a two-minute walkthrough.
+The repository includes setup instructions, the design report, genuine local-model discovery evidence, deterministic replay evidence, runtime error handling, live-session handoff, and the optional extensions. The landing page includes a 1:45 walkthrough in 4K.
 
 Thank you for reviewing my submission.
 

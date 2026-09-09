@@ -16,8 +16,9 @@ These are captured executions against the running, nested-frame banking sandbox.
 - `generated-automation.mjs` and `generated-code-verification.json`: runnable generated invocation and its successful execution.
 - `catalog.json`: the callable capability schema.
 - `verification.json`: integrated check results; known failure cases are intentionally successful tests of safe behavior.
-- `demo-verification.json`: the refreshed two-minute screen recording, genuine discovery/replay counts, successful handoff, and narration provenance.
+- `demo-verification.json`: the refreshed 4K screen recording (1:45), genuine discovery/replay counts, successful handoff, and narration provenance.
+- `color-verification.json`: computed text contrast across the landing page, four workspace views, banking frame, and outcome/intervention states; identical primary button color across the frame boundary.
 - `redesign-verification.json`: all four workspace views, interactive preview tabs, and reduced-motion behavior on desktop/mobile. Reproduce with `npx tsx scripts/check-redesign.ts`.
 - `ui-verification.json`: desktop/mobile replay, font-loading and overflow checks.
 
-The two-minute screen recording is in `public/demo.mp4`, with English captions in `public/demo.vtt`. Screenshots in discovery are masked; the video only displays synthetic training records.
+The 4K screen recording (1:45) is in `public/demo.mp4`, with English captions in `public/demo.vtt`. Screenshots in discovery are masked; the video only displays synthetic training records.

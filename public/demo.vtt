@@ -1,88 +1,88 @@
 WEBVTT
 
-00:00:00.700 --> 00:00:01.655 line:82%
+00:00:00.300 --> 00:00:01.255 line:82%
 Here's Relay.
 
-00:00:01.655 --> 00:00:09.220 line:82%
+00:00:01.255 --> 00:00:08.820 line:82%
 The idea is simple: let a model figure out a workflow once, then run
 it again without asking the model.
 
-00:00:10.500 --> 00:00:12.310 line:82%
+00:00:09.250 --> 00:00:11.060 line:82%
 Let's start with discovery.
 
-00:00:12.310 --> 00:00:16.331 line:82%
+00:00:11.060 --> 00:00:15.081 line:82%
 I'm asking a local model to find a member's savings balance.
 
-00:00:16.331 --> 00:00:21.492 line:82%
+00:00:15.081 --> 00:00:20.242 line:82%
 It reads the screen, chooses an allowed action, and checks what
 happens next.
 
-00:00:25.500 --> 00:00:27.420 line:82%
+00:00:20.750 --> 00:00:22.670 line:82%
 You can follow the steps here.
 
-00:00:27.420 --> 00:00:31.580 line:82%
+00:00:22.670 --> 00:00:26.830 line:82%
 Search for the member, open their account, then read the balance.
 
-00:00:31.580 --> 00:00:38.364 line:82%
+00:00:26.830 --> 00:00:33.614 line:82%
 Relay checks the member's identity and the final screen before it
 saves anything as a successful workflow.
 
-00:00:43.500 --> 00:00:49.922 line:82%
+00:00:34.150 --> 00:00:40.572 line:82%
 Here's what gets saved: a capability with inputs, outputs, and the
 exact steps to repeat.
 
-00:00:49.922 --> 00:00:54.468 line:82%
+00:00:40.572 --> 00:00:45.118 line:82%
 You can inspect it, export it, and test it before approving it.
 
-00:00:56.500 --> 00:00:58.855 line:82%
+00:00:45.650 --> 00:00:48.005 line:82%
 Now let's try a different member.
 
-00:00:58.855 --> 00:01:00.783 line:82%
+00:00:48.005 --> 00:00:49.933 line:82%
 Same capability, new input.
 
-00:01:00.783 --> 00:01:04.280 line:82%
+00:00:49.933 --> 00:00:53.430 line:82%
 The saved steps run against the actual interface.
 
-00:01:04.280 --> 00:01:07.492 line:82%
+00:00:53.430 --> 00:00:56.642 line:82%
 And here, you can see it used no model calls.
 
-00:01:09.500 --> 00:01:11.755 line:82%
+00:00:57.150 --> 00:00:59.405 line:82%
 What if the member doesn't exist?
 
-00:01:11.755 --> 00:01:14.284 line:82%
+00:00:59.405 --> 00:01:01.934 line:82%
 Relay returns a clear, known outcome.
 
-00:01:14.284 --> 00:01:17.564 line:82%
+00:01:01.934 --> 00:01:05.214 line:82%
 It doesn't crash, or pretend the task succeeded.
 
-00:01:19.500 --> 00:01:21.352 line:82%
+00:01:05.650 --> 00:01:07.502 line:82%
 Now the session has expired.
 
-00:01:21.352 --> 00:01:24.195 line:82%
+00:01:07.502 --> 00:01:10.345 line:82%
 Relay pauses and tells me where it stopped.
 
-00:01:24.195 --> 00:01:28.692 line:82%
+00:01:10.345 --> 00:01:14.842 line:82%
 I can take over this same session, with all the context still there.
 
-00:01:30.500 --> 00:01:33.474 line:82%
+00:01:15.350 --> 00:01:18.324 line:82%
 I'll restore the session and hand control back.
 
-00:01:33.474 --> 00:01:36.068 line:82%
+00:01:18.324 --> 00:01:20.918 line:82%
 Relay picks up from the interrupted step.
 
-00:01:36.068 --> 00:01:38.852 line:82%
+00:01:20.918 --> 00:01:23.702 line:82%
 The timeline keeps a record of that handoff.
 
-00:01:40.500 --> 00:01:43.312 line:82%
+00:01:24.150 --> 00:01:26.962 line:82%
 This also works with a second institution.
 
-00:01:43.312 --> 00:01:49.740 line:82%
+00:01:26.962 --> 00:01:33.390 line:82%
 The interface is slightly different, but an explicit override lets us
 reuse the same capability.
 
-00:01:51.500 --> 00:01:54.664 line:82%
+00:01:34.000 --> 00:01:37.164 line:82%
 And every run leaves evidence you can inspect.
 
-00:01:54.664 --> 00:01:59.684 line:82%
+00:01:37.164 --> 00:01:42.184 line:82%
 That's Relay: learn the workflow, keep the contract, and stay in
 control.

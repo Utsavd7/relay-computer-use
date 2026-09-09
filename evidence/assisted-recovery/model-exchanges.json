@@ -16,18 +16,18 @@
       "max_tokens": 220
     },
     "response": {
-      "id": "chatcmpl-b735ae16-ccc5-4f24-b7d4-3fd6226cef20",
+      "id": "chatcmpl-38768ceb-7221-4bdd-b56a-74d5d2711441",
       "system_fingerprint": "0.31.3-0.32.2-macOS-27.0-arm64-arm-64bit-applegpu_g15s",
       "object": "chat.completion",
       "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
-      "created": 1788964547,
+      "created": 1788968116,
       "choices": [
         {
           "index": 0,
           "finish_reason": "stop",
           "message": {
             "role": "assistant",
-            "content": "{\"choice\": 0, \"reason\": \"Clicking 'Restore session' is the only safe action to recover the blocked session without performing any business operation.\"}"
+            "content": "{\"choice\": 0, \"reason\": \"Clicking 'Restore session' is the only safe action to recover the blocked session without performing any business operations.\"}"
           }
         }
       ],
@@ -36,7 +36,7 @@
         "completion_tokens": 34,
         "total_tokens": 210,
         "prompt_tokens_details": {
-          "cached_tokens": 175
+          "cached_tokens": 97
         }
       }
     }

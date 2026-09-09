@@ -5,7 +5,7 @@
     "step": 5,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "3dc2eeba-8433-46bd-9b6a-d177ccbe7c9b",
+    "run_id": "e8a273f3-f9cf-4c7c-9e2f-32e74157ed29",
     "expected": "Unique permitted target, declared checkpoint and matching member",
     "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Account overviewAccount available · SavingsMember ID[REDACTED]Savings balance[REDACTED]Back to search Submit transferSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Back to search\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Submit transfer\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 2,\n      \"name\": \"Savings balance\",\n      \"kind\": \"text\"\n    }\n  ]\n}"
   },
@@ -120,7 +120,7 @@
   },
   "events": [
     {
-      "time": "2026-09-09T15:16:32.294Z",
+      "time": "2026-09-09T15:35:18.956Z",
       "type": "replay.started",
       "step": 0,
       "detail": {
@@ -131,7 +131,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.294Z",
+      "time": "2026-09-09T15:35:18.956Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -144,7 +144,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.294Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -156,7 +156,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.294Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -168,7 +168,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.294Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.complete",
       "step": 1,
       "detail": {
@@ -180,7 +180,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -192,7 +192,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.complete",
       "step": 2,
       "detail": {
@@ -204,7 +204,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.start",
       "step": 3,
       "detail": {
@@ -216,7 +216,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.957Z",
       "type": "action.complete",
       "step": 3,
       "detail": {
@@ -228,7 +228,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.958Z",
       "type": "action.start",
       "step": 4,
       "detail": {
@@ -241,7 +241,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.958Z",
       "type": "action.complete",
       "step": 4,
       "detail": {
@@ -253,7 +253,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.958Z",
       "type": "action.start",
       "step": 5,
       "detail": {
@@ -265,7 +265,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:32.295Z",
+      "time": "2026-09-09T15:35:18.958Z",
       "type": "run.completed",
       "step": 5,
       "detail": {
@@ -274,7 +274,7 @@
         "step": 5,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "3dc2eeba-8433-46bd-9b6a-d177ccbe7c9b",
+        "run_id": "e8a273f3-f9cf-4c7c-9e2f-32e74157ed29",
         "expected": "Unique permitted target, declared checkpoint and matching member",
         "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Account overviewAccount available · SavingsMember ID[REDACTED]Savings balance[REDACTED]Back to search Submit transferSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Back to search\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Submit transfer\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 2,\n      \"name\": \"Savings balance\",\n      \"kind\": \"text\"\n    }\n  ]\n}"
       }

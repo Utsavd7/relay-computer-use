@@ -5,7 +5,7 @@
     "step": 2,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "741c9b6d-7c1f-4f23-b5fe-3e21d8fffc57"
+    "run_id": "02db2d92-0b16-4447-ad43-9b6c961dc23a"
   },
   "artifact": {
     "schema_version": "1.0",
@@ -111,7 +111,7 @@
   },
   "events": [
     {
-      "time": "2026-09-09T15:16:05.164Z",
+      "time": "2026-09-09T15:34:43.516Z",
       "type": "replay.started",
       "step": 0,
       "detail": {
@@ -122,7 +122,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:05.164Z",
+      "time": "2026-09-09T15:34:43.516Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -135,7 +135,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:05.164Z",
+      "time": "2026-09-09T15:34:43.516Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -147,7 +147,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:05.165Z",
+      "time": "2026-09-09T15:34:43.516Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -159,7 +159,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:05.165Z",
+      "time": "2026-09-09T15:34:43.517Z",
       "type": "action.complete",
       "step": 1,
       "detail": {
@@ -171,7 +171,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:05.165Z",
+      "time": "2026-09-09T15:34:43.517Z",
       "type": "run.completed",
       "step": 2,
       "detail": {
@@ -180,7 +180,7 @@
         "step": 2,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "741c9b6d-7c1f-4f23-b5fe-3e21d8fffc57"
+        "run_id": "02db2d92-0b16-4447-ad43-9b6c961dc23a"
       }
     }
   ]

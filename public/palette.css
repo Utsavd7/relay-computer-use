@@ -1,0 +1,34 @@
+/* Shared product colors: landing, workspace, and nested training surface. */
+:root {
+  --relay-ink: #171e1a;
+  --relay-ink-raised: #202b23;
+  --relay-ink-active: #2e4033;
+  --relay-ink-border: #415546;
+  --relay-on-dark: #eff4eb;
+  --relay-on-dark-muted: #a5b69f;
+  --relay-on-dark-subtle: #899d83;
+  --relay-canvas: #f3f4ef;
+  --relay-surface: #fafcf7;
+  --relay-white: #ffffff;
+  --relay-surface-muted: #eaf0e6;
+  --relay-surface-active: #e1edda;
+  --relay-border: #d4dfce;
+  --relay-border-strong: #b5c7aa;
+  --relay-text: #27392b;
+  --relay-text-secondary: #51654a;
+  --relay-text-muted: #5c6d55;
+  --relay-primary: #225d46;
+  --relay-primary-hover: #174a36;
+  --relay-mint: #b9f3c8;
+  --relay-mint-hover: #d1ffdc;
+  --relay-focus: #438767;
+  --relay-success: #326443;
+  --relay-success-bg: #e8f3e7;
+  --relay-success-border: #c7dcc7;
+  --relay-warning: #835f2d;
+  --relay-warning-bg: #fbf3e5;
+  --relay-warning-border: #e6d3ad;
+  --relay-danger: #a74d3f;
+  --relay-danger-bg: #faeeea;
+  --relay-danger-border: #e8c9c0;
+}

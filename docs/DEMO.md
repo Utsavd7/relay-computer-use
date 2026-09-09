@@ -2,6 +2,8 @@
 
 The landing page embeds `public/demo.mp4` with English captions from `public/demo.vtt`. It is an actual recording of the functioning application, including genuine local-model discovery; it is not an animation of invented results.
 
+The delivered MP4 is **3840 × 2160 (4K), 105 seconds, H.264 with AAC audio**. The same discovery, artifact, replay, error, handoff, tenant reuse, and evidence sequence is preserved. Pauses between chapters are tightened; the recorded neural speech keeps its natural pace. Capture uses a native 4K browser viewport with a 2× UI scale for legibility.
+
 ## Reproduce
 
 1. Start the UI with `npm run dev`.
@@ -15,13 +17,13 @@ Only synthetic records appear. Chapter overlays are presentation labels; screen 
 ## Chapters
 
 - 00:00 Product overview
-- 00:10 Real local-model discovery
-- 00:43 Typed reusable artifact
-- 00:56 Deterministic replay with a new member
-- 01:09 Known not-found outcome
-- 01:19 Live-session human handoff
-- 01:40 Cross-tenant reuse
-- 01:51 Inspectable evidence
+- 00:09 Real local-model discovery
+- 00:34 Typed reusable artifact
+- 00:45 Deterministic replay with a new member
+- 00:57 Known not-found outcome
+- 01:05 Live-session human handoff
+- 01:24 Cross-tenant reuse
+- 01:33 Inspectable evidence
 
 The refreshed recording uses the current Relay interface. Narration is synthesized, with a conversational script and deliberate pauses; it is not a recording of the applicant.
 

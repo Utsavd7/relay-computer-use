@@ -5,7 +5,7 @@
     "step": 2,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "8353a0b9-0303-4f2c-8d9e-406102f1de61",
+    "run_id": "b4bd340b-e004-4aed-bd59-0a18d340b823",
     "expected": "Unique permitted target, declared checkpoint and matching member",
     "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Unexpected application errorThe application cannot continue.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
   },
@@ -113,7 +113,7 @@
   },
   "events": [
     {
-      "time": "2026-09-09T15:16:25.582Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "replay.started",
       "step": 0,
       "detail": {
@@ -124,7 +124,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.582Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -137,7 +137,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.582Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -149,7 +149,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.583Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -161,7 +161,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.583Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "action.complete",
       "step": 1,
       "detail": {
@@ -173,7 +173,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.583Z",
+      "time": "2026-09-09T15:35:03.931Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -185,7 +185,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.684Z",
+      "time": "2026-09-09T15:35:04.032Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -197,7 +197,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.785Z",
+      "time": "2026-09-09T15:35:04.134Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -209,7 +209,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.887Z",
+      "time": "2026-09-09T15:35:04.237Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -221,7 +221,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:25.990Z",
+      "time": "2026-09-09T15:35:04.337Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -233,7 +233,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.091Z",
+      "time": "2026-09-09T15:35:04.438Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -245,7 +245,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.193Z",
+      "time": "2026-09-09T15:35:04.540Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -257,7 +257,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.295Z",
+      "time": "2026-09-09T15:35:04.641Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -269,7 +269,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.397Z",
+      "time": "2026-09-09T15:35:04.743Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -281,7 +281,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.500Z",
+      "time": "2026-09-09T15:35:04.845Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -293,7 +293,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.602Z",
+      "time": "2026-09-09T15:35:04.947Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -305,7 +305,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.705Z",
+      "time": "2026-09-09T15:35:05.049Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -317,7 +317,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.806Z",
+      "time": "2026-09-09T15:35:05.152Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -329,7 +329,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:26.908Z",
+      "time": "2026-09-09T15:35:05.254Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -341,7 +341,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.009Z",
+      "time": "2026-09-09T15:35:05.355Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -353,7 +353,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.111Z",
+      "time": "2026-09-09T15:35:05.456Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -365,7 +365,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.212Z",
+      "time": "2026-09-09T15:35:05.557Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -377,7 +377,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.314Z",
+      "time": "2026-09-09T15:35:05.659Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -389,7 +389,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.417Z",
+      "time": "2026-09-09T15:35:05.761Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -401,7 +401,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.519Z",
+      "time": "2026-09-09T15:35:05.862Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -413,7 +413,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.623Z",
+      "time": "2026-09-09T15:35:05.964Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -425,7 +425,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.724Z",
+      "time": "2026-09-09T15:35:06.067Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -437,7 +437,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.826Z",
+      "time": "2026-09-09T15:35:06.169Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -449,7 +449,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:27.929Z",
+      "time": "2026-09-09T15:35:06.270Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -461,7 +461,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.031Z",
+      "time": "2026-09-09T15:35:06.372Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -473,7 +473,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.133Z",
+      "time": "2026-09-09T15:35:06.473Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -485,7 +485,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.236Z",
+      "time": "2026-09-09T15:35:06.574Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -497,7 +497,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.339Z",
+      "time": "2026-09-09T15:35:06.676Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -509,7 +509,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.441Z",
+      "time": "2026-09-09T15:35:06.778Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -521,7 +521,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.543Z",
+      "time": "2026-09-09T15:35:06.880Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -533,7 +533,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.645Z",
+      "time": "2026-09-09T15:35:06.981Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -545,7 +545,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.747Z",
+      "time": "2026-09-09T15:35:07.084Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -557,7 +557,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.850Z",
+      "time": "2026-09-09T15:35:07.186Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -569,7 +569,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:28.952Z",
+      "time": "2026-09-09T15:35:07.288Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -581,7 +581,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.055Z",
+      "time": "2026-09-09T15:35:07.389Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -593,7 +593,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.157Z",
+      "time": "2026-09-09T15:35:07.491Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -605,7 +605,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.259Z",
+      "time": "2026-09-09T15:35:07.592Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -617,7 +617,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.361Z",
+      "time": "2026-09-09T15:35:07.694Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -629,7 +629,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.463Z",
+      "time": "2026-09-09T15:35:07.796Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -641,7 +641,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.564Z",
+      "time": "2026-09-09T15:35:07.898Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -653,7 +653,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.667Z",
+      "time": "2026-09-09T15:35:08.001Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -665,7 +665,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.769Z",
+      "time": "2026-09-09T15:35:08.103Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -677,7 +677,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.871Z",
+      "time": "2026-09-09T15:35:08.204Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -689,7 +689,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:29.973Z",
+      "time": "2026-09-09T15:35:08.305Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -701,7 +701,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.074Z",
+      "time": "2026-09-09T15:35:08.406Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -713,7 +713,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.176Z",
+      "time": "2026-09-09T15:35:08.507Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -725,7 +725,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.278Z",
+      "time": "2026-09-09T15:35:08.608Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -737,7 +737,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.380Z",
+      "time": "2026-09-09T15:35:08.709Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -749,7 +749,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.483Z",
+      "time": "2026-09-09T15:35:08.811Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -761,7 +761,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.585Z",
+      "time": "2026-09-09T15:35:08.912Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -773,7 +773,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.688Z",
+      "time": "2026-09-09T15:35:09.013Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -785,7 +785,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.790Z",
+      "time": "2026-09-09T15:35:09.115Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -797,7 +797,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.892Z",
+      "time": "2026-09-09T15:35:09.217Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -809,7 +809,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:30.994Z",
+      "time": "2026-09-09T15:35:09.319Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -821,7 +821,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.097Z",
+      "time": "2026-09-09T15:35:09.421Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -833,7 +833,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.199Z",
+      "time": "2026-09-09T15:35:09.522Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -845,7 +845,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.301Z",
+      "time": "2026-09-09T15:35:09.623Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -857,7 +857,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.404Z",
+      "time": "2026-09-09T15:35:09.725Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -869,7 +869,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.505Z",
+      "time": "2026-09-09T15:35:09.827Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -881,7 +881,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.607Z",
+      "time": "2026-09-09T15:35:09.930Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -893,7 +893,19 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.607Z",
+      "time": "2026-09-09T15:35:10.032Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T15:35:10.032Z",
       "type": "control.transferred",
       "step": 2,
       "detail": {
@@ -903,7 +915,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:16:31.878Z",
+      "time": "2026-09-09T15:35:10.206Z",
       "type": "run.completed",
       "step": 2,
       "detail": {
@@ -912,7 +924,7 @@
         "step": 2,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "8353a0b9-0303-4f2c-8d9e-406102f1de61",
+        "run_id": "b4bd340b-e004-4aed-bd59-0a18d340b823",
         "expected": "Unique permitted target, declared checkpoint and matching member",
         "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Unexpected application errorThe application cannot continue.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
       }
