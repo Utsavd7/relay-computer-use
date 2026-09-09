@@ -53,10 +53,10 @@ async function chapter(number: string, title: string) {
       const el = document.createElement('div');
       el.id = 'recording-caption';
       el.style.cssText =
-        'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:15px;align-items:center;padding:12px 21px;border-radius:8px;background:#10203ded;color:white;font:13px Manrope, sans-serif;box-shadow:0 8px 35px #10203d30;pointer-events:none';
+        'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:15px;align-items:center;padding:12px 21px;border-radius:8px;background:#1c2a1ded;color:white;font:13px DM Sans, sans-serif;box-shadow:0 8px 35px #0e1b0c30;pointer-events:none';
       const n = document.createElement('span');
       n.textContent = number;
-      n.style.cssText = 'color:#96b3ff;font:11px monospace';
+      n.style.cssText = 'color:#b9f3c8;font:11px monospace';
       const t = document.createElement('span');
       t.textContent = title;
       el.appendChild(n);

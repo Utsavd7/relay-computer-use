@@ -5,6 +5,8 @@
   <p>A working computer-use automation system with local LLM discovery, deterministic replay, and live-session human handoff.</p>
 </div>
 
+[![Relay — the execution loop](public/demo-poster.jpg)](https://utsavd7.github.io/relay-computer-use/)
+
 ## Try it
 
 - **Public app:** https://utsavd7.github.io/relay-computer-use/

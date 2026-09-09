@@ -1,36 +1,63 @@
-"""Render the actual screen recording with local system speech and captions. No API."""
+"""Narrate the real screen recording with neural speech, natural pauses and matching captions.
+Requires: pip install edge-tts; FFmpeg. Only the public script is sent to the speech service.
+"""
 from pathlib import Path
-import subprocess, json
-folder=Path('work/demo');folder.mkdir(parents=True,exist_ok=True)
+import asyncio, subprocess, json, argparse, textwrap
+import edge_tts
+folder=Path('work/demo'); folder.mkdir(parents=True,exist_ok=True)
 chapters=[
-(0,10,'Relay turns a successful user interface workflow into a reusable capability. A model discovers the procedure. A deterministic engine runs it again.'),
-(10,25,'Discovery uses a real local language model. It sees the current screen and chooses one permitted action at a time. The target is a live banking sandbox, with synthetic records.'),
-(25,43,'The model searches for the member, opens the savings account, and reads the balance. The executor verifies the final screen and member identity. The successful procedure is then saved as a reusable capability.'),
-(43,56,'The artifact has a clear contract: typed inputs, declared outputs, stable targets, and verified checkpoints. Review the steps, export runnable code, and validate replays before approving it.'),
-(56,69,'Now replay the same capability for a different member. The engine follows the recorded rules and extracts the current balance from the live interface, with no model decisions.'),
-(69,79,'A missing member returns a known business outcome. The caller receives useful information, rather than an automation crash or a misleading success.'),
-(79,90,'An expired session pauses automation and requests intervention. The human receives the reason, current step, and control of the existing live session.'),
-(90,100,'Restore the session, then return control. Automation resumes from the interrupted step and verifies the original checkpoint. The handoff is recorded.'),
-(100,111,'The same capability also runs against a second institution. An explicit control name override handles the variation, while the workflow and result contract stay the same.'),
-(111,120,'Every run produces redacted, inspectable evidence. Discover once. Replay with control. Explore the working product and its source repository.'),
+(0.7,10,"Here's Relay. The idea is simple: let a model figure out a workflow once, then run it again without asking the model."),
+(10.5,25,"Let's start with discovery. I'm asking a local model to find a member's savings balance. It reads the screen, chooses an allowed action, and checks what happens next."),
+(25.5,43,"You can follow the steps here. Search for the member, open their account, then read the balance. Relay checks the member's identity and the final screen before it saves anything as a successful workflow."),
+(43.5,56,"Here's what gets saved: a capability with inputs, outputs, and the exact steps to repeat. You can inspect it, export it, and test it before approving it."),
+(56.5,69,"Now let's try a different member. Same capability, new input. The saved steps run against the actual interface. And here, you can see it used no model calls."),
+(69.5,79,"What if the member doesn't exist? Relay returns a clear, known outcome. It doesn't crash, or pretend the task succeeded."),
+(79.5,90,"Now the session has expired. Relay pauses and tells me where it stopped. I can take over this same session, with all the context still there."),
+(90.5,100,"I'll restore the session and hand control back. Relay picks up from the interrupted step. The timeline keeps a record of that handoff."),
+(100.5,111,"This also works with a second institution. The interface is slightly different, but an explicit override lets us reuse the same capability."),
+(111.5,120,"And every run leaves evidence you can inspect. That's Relay: learn the workflow, keep the contract, and stay in control."),
 ]
+voice='en-US-AndrewMultilingualNeural'
+async def narrate():
+ for i,(_,_,text) in enumerate(chapters):
+  out=folder/f'neural-{i}.mp3'; saved=folder/f'neural-{i}.txt'
+  if out.exists() and out.stat().st_size>1000 and saved.exists() and saved.read_text()==text: continue
+  for attempt in range(3):
+   try:
+    await asyncio.wait_for(edge_tts.Communicate(text,voice,rate='-3%').save(str(out)),45)
+    saved.write_text(text);break
+   except Exception as error:
+    if attempt==2:raise
+    print(f'Retrying voice chapter {i+1}: {type(error).__name__}',flush=True)
+    await asyncio.sleep(2)
+  print(f'Voice chapter {i+1} ready',flush=True)
+def duration(p):return float(json.loads(subprocess.check_output(['ffprobe','-v','quiet','-show_format','-of','json',str(p)]))['format']['duration'])
+def stamp(s):
+ ms=round(s*1000);return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02}.{ms%1000:03}'
+asyncio.run(narrate())
+args=argparse.ArgumentParser();args.add_argument('--audio-only',action='store_true');options=args.parse_args()
+filters=[];streams=[];command=['ffmpeg','-y']
+if not options.audio_only:command+=['-i',str(folder/'source.webm')]
+offset=0 if options.audio_only else 1
+vtt=['WEBVTT',''];timings=[]
 for i,(start,end,text) in enumerate(chapters):
- p=folder/f'voice-{i}.txt';p.write_text(text)
- subprocess.run(['say','-v','Samantha','-r','165','-f',str(p),'-o',str(folder/f'voice-{i}.aiff')],check=True)
-if not (folder/'source.webm').exists():
- print('Narration ready; run again after the screen recording completes.');raise SystemExit(0)
-source_duration=float(json.loads(subprocess.check_output(['ffprobe','-v','quiet','-show_format','-of','json',str(folder/'source.webm')]))['format']['duration'])
-recorded_duration=json.loads((folder/'timing.json').read_text())['duration_ms']/1000
-preroll=0  # Playwright starts at the first rendered frame; encoder shutdown adds a tail.
-command=['ffmpeg','-y','-ss',str(preroll),'-i',str(folder/'source.webm')]
-filters=[];streams=[]
-for i,(start,end,_) in enumerate(chapters):
- audio=folder/f'voice-{i}.aiff';command+=['-i',str(audio)]
- duration=float(json.loads(subprocess.check_output(['ffprobe','-v','quiet','-show_format','-of','json',str(audio)]))['format']['duration'])
- tempo=max(1,duration/(end-start-.3))
- filters.append(f'[{i+1}:a]atempo={tempo:.4f},adelay={start*1000}|{start*1000},apad=whole_dur=120[a{i}]');streams.append(f'[a{i}]')
-filters.append(''.join(streams)+f'amix=inputs={len(chapters)}:normalize=0:duration=longest,alimiter=limit=0.95[audio]')
-command+=['-filter_complex',';'.join(filters),'-map','0:v','-map','[audio]','-t','120','-c:v','libx264','-preset','medium','-crf','24','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-movflags','+faststart','public/demo.mp4']
-subprocess.run(command,check=True)
-subprocess.run(['ffmpeg','-y','-ss','3','-i','public/demo.mp4','-frames:v','1','public/demo-poster.jpg'],check=True)
-print('Rendered public/demo.mp4 (120 seconds).')
+ audio=folder/f'neural-{i}.mp3';command+=['-i',str(audio)];length=duration(audio)
+ tempo=max(1,length/(end-start-.12))
+ if tempo>1.18:raise ValueError(f'Chapter {i} is too long for natural delivery: {length}s. Shorten the script.')
+ actual=length/tempo;timings.append({'chapter':i+1,'start':start,'duration':actual,'tempo':tempo})
+ filters.append(f'[{i+offset}:a]atempo={tempo:.5f},afade=t=in:d=0.035,afade=t=out:st={max(0,actual-.07):.4f}:d=0.07,adelay={round(start*1000)}|{round(start*1000)},apad=whole_dur=120[a{i}]');streams.append(f'[a{i}]')
+ # Sentence-length subtitles follow the spoken chapter without covering whole paragraphs.
+ sentences=text.replace('? ', '?|').replace('. ', '.|').split('|');cursor=start;total=sum(len(s) for s in sentences)
+ for sentence in sentences:
+  finish=cursor+actual*len(sentence)/total
+  vtt += [f'{stamp(cursor)} --> {stamp(finish)} line:82%','\n'.join(textwrap.wrap(sentence,70)),''];cursor=finish
+filters.append(''.join(streams)+f'amix=inputs={len(chapters)}:normalize=0:duration=longest,loudnorm=I=-16:TP=-1.5:LRA=9[audio]')
+command+=['-filter_complex',';'.join(filters)]
+if not options.audio_only:command+=['-map','0:v']
+command+=['-map','[audio]','-t','120']
+if options.audio_only:command+=['-c:a','libmp3lame','-b:a','192k',str(folder/'narration.mp3')]
+else:command+=['-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart','public/demo.mp4']
+subprocess.run(command,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+(folder/'narration-timing.json').write_text(json.dumps({'voice':voice,'chapters':timings},indent=2))
+Path('public/demo.vtt').write_text('\n'.join(vtt))
+print(json.dumps(timings,indent=2),flush=True)

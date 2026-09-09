@@ -1,202 +1,349 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import {
-  Workflow,
   ArrowUpRight,
   ArrowRight,
   Play,
-  ShieldCheck,
-  Hand,
+  Check,
+  ChevronRight,
   Braces,
-  GitBranch,
-  CheckCircle2,
-  GitFork,
+  MousePointer2,
+  ScanLine,
+  Fingerprint,
+  CornerDownRight,
 } from 'lucide-react';
+import { exampleArtifact as example } from '@/core/example';
+
+const source = 'https://github.com/Utsavd7/relay-computer-use';
+const stages = [
+  {
+    label: 'Discover',
+    icon: ScanLine,
+    title: 'A model finds the path.',
+    description:
+      'Observe the screen. Choose a permitted action. Verify what changed.',
+    foot: 'Local model · real UI observations',
+  },
+  {
+    label: 'Record',
+    icon: Braces,
+    title: 'The workflow becomes a contract.',
+    description:
+      'Keep the actions, parameter bindings, and checkpoint in a versioned capability.',
+    foot: 'Typed inputs · reviewable steps',
+  },
+  {
+    label: 'Replay',
+    icon: MousePointer2,
+    title: 'Run it again. With control.',
+    description:
+      'Execute the saved steps for a new member, without calling the model.',
+    foot: 'Deterministic execution · verified output',
+  },
+];
 export default function Landing({ open }: { open: () => void }) {
+  const [stage, setStage] = useState(2);
+  const root = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12 },
+    );
+    root.current
+      ?.querySelectorAll('[data-reveal]')
+      .forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
   return (
-    <div className="landing">
-      <div className="landing-orbit" />
+    <div className="landing" ref={root}>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <div className="landing-nav">
-        <a href="./" className="brand">
+        <a href="./" className="brand" aria-label="Relay home">
           <img src="favicon.svg" alt="" />
-          relay<span>.</span>
+          relay
         </a>
-        <div>
-          <a href="#how">How it works</a>
-          <a href="#demo">Watch demo</a>
+        <nav aria-label="Main navigation">
+          <a href="#how">The system</a>
+          <a href="#demo">
+            Walkthrough <span>02:00</span>
+          </a>
+          <a href={source} target="_blank" rel="noreferrer">
+            GitHub <ArrowUpRight size={13} />
+          </a>
+        </nav>
+        <button className="nav-launch" onClick={open}>
+          Launch workbench <ArrowUpRight size={16} />
+        </button>
+      </div>
+      <div className="hero" id="main-content">
+        <div className="hero-kicker">
+          <span>
+            <i className="status-dot" />
+            Computer-use infrastructure
+          </span>
+          <span className="hero-edition">Discover / Record / Replay</span>
+        </div>
+        <div className="hero-heading">
+          <h1>
+            From one good run.
+            <br />
+            <em>To every next one.</em>
+          </h1>
+          <div className="hero-aside">
+            <p>
+              Give AI a way to act.
+              <br />
+              Give every action a way back.
+            </p>
+            <span>
+              A local model learns a UI workflow. Relay turns it into a
+              repeatable capability—with you in control.
+            </span>
+          </div>
+        </div>
+        <div className="hero-actions">
+          <button className="primary" onClick={open}>
+            Open the workbench <ArrowUpRight size={18} />
+          </button>
+          <a href="#demo">
+            <span className="play-circle">
+              <Play size={12} fill="currentColor" />
+            </span>
+            See it in 2 minutes
+          </a>
+          <span className="hero-access">No sign-in. Runs in your browser.</span>
+        </div>
+        <div className="product-stage">
+          <div className="stage-bar">
+            <span>
+              <img src="favicon.svg" alt="" />
+              The execution loop
+            </span>
+            <span className="preview-tag">Recorded capability / preview</span>
+          </div>
+          <div
+            className="stage-tabs"
+            role="tablist"
+            aria-label="Explore the execution loop"
+          >
+            {stages.map(({ label, icon: Icon }, i) => (
+              <button
+                key={label}
+                id={`preview-tab-${i}`}
+                role="tab"
+                aria-selected={stage === i}
+                tabIndex={stage === i ? 0 : -1}
+                aria-controls={`preview-panel-${i}`}
+                className={stage === i ? 'selected' : ''}
+                onClick={() => setStage(i)}
+                onKeyDown={(event) => {
+                  if (
+                    !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(
+                      event.key,
+                    )
+                  )
+                    return;
+                  event.preventDefault();
+                  const next =
+                    event.key === 'Home'
+                      ? 0
+                      : event.key === 'End'
+                        ? 2
+                        : (i + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
+                  setStage(next);
+                  document.getElementById(`preview-tab-${next}`)?.focus();
+                }}
+              >
+                <span className="stage-index">0{i + 1}</span>
+                <Icon size={16} />
+                {label}
+                <ChevronRight size={14} />
+              </button>
+            ))}
+          </div>
+          <div
+            className="stage-content"
+            key={stage}
+            id={`preview-panel-${stage}`}
+            role="tabpanel"
+            aria-labelledby={`preview-tab-${stage}`}
+          >
+            <div className="stage-brief">
+              <span className="micro-label">
+                0{stage + 1} / {stages[stage].label}
+              </span>
+              <h2>{stages[stage].title}</h2>
+              <p>{stages[stage].description}</p>
+              <div className="stage-foot">
+                <i />
+                {stages[stage].foot}
+              </div>
+            </div>
+            <div className="capability-preview">
+              <div className="preview-title">
+                <span className="capability-glyph">
+                  <Braces size={20} />
+                </span>
+                <div>
+                  <strong>Savings balance</strong>
+                  <small>
+                    get_savings_balance <span>v{example.version}</span>
+                  </small>
+                </div>
+                <span className="preview-version">
+                  {stage === 0
+                    ? 'LLM discovery'
+                    : stage === 1
+                      ? 'Saved artifact'
+                      : 'Ready to replay'}
+                </span>
+              </div>
+              <div className="preview-steps">
+                {example.steps.map((step, i) => (
+                  <div className="preview-step" key={i}>
+                    <span className="step-tick">
+                      <Check size={11} />
+                    </span>
+                    <span>{step.target.name}</span>
+                    <code>{step.action}</code>
+                  </div>
+                ))}
+              </div>
+              <div className="preview-checkpoint">
+                <Fingerprint size={16} />
+                <span>
+                  Checkpoint: <b>{example.checkpoint.text}</b>
+                </span>
+                <Check size={14} />
+              </div>
+            </div>
+            <div className="stage-output">
+              <span className="micro-label">The handover</span>
+              <div className="parameter-block">
+                <span>INPUT</span>
+                <code>
+                  member_id<span>: string</span>
+                </code>
+              </div>
+              <div className="output-connector">
+                <CornerDownRight size={25} />
+                <span>
+                  same steps,
+                  <br />
+                  new parameters
+                </span>
+              </div>
+              <div className="parameter-block">
+                <span>OUTPUT</span>
+                <code>
+                  balance<span>: number</span>
+                </code>
+                <code>
+                  currency<span>: string</span>
+                </code>
+              </div>
+              <button onClick={open}>
+                Try a real run <ArrowUpRight size={15} />
+              </button>
+            </div>
+          </div>
+          <div className="stage-bottom">
+            <span>
+              <span className="status-dot" />
+              Based on a real recorded discovery
+            </span>
+            <a
+              href={`${source}/tree/main/evidence`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Inspect the evidence <ArrowUpRight size={13} />
+            </a>
+          </div>
+        </div>
+        <div className="principles-strip">
+          <span>Built for the UI layer.</span>
+          <p>No target API</p>
+          <p>Local inference</p>
+          <p>Model-free replay</p>
+          <p>Human handoff</p>
+        </div>
+      </div>
+      <div className="landing-section" id="how" data-reveal>
+        <div className="section-intro">
+          <p className="eyebrow">THE SYSTEM, SIMPLIFIED</p>
+          <h2>
+            Intelligence where it helps.
+            <br />
+            <span>Control where it matters.</span>
+          </h2>
+          <p>
+            Learning and execution have different jobs. Relay keeps their
+            responsibilities clear.
+          </p>
           <a
-            href="https://github.com/Utsavd7/relay-computer-use"
+            className="text-link"
+            href={`${source}/blob/main/REPORT.md`}
             target="_blank"
             rel="noreferrer"
           >
-            <GitFork size={16} />
-            Source
-            <ArrowUpRight size={13} />
+            Read the architecture <ArrowUpRight size={15} />
           </a>
-          <button onClick={open}>
-            Open workbench <ArrowUpRight size={15} />
-          </button>
         </div>
-      </div>
-      <div className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span />
-            COMPUTER-USE, WITH A MEMORY.
-          </p>
-          <h1>
-            Let AI find the way.
-            <br />
-            <em>Make it repeatable.</em>
-          </h1>
-          <p className="hero-description">
-            Relay turns a successful UI interaction into a reusable capability.
-            A model discovers the workflow. A deterministic engine runs it
-            again—with clear outcomes and a human ready to take over.
-          </p>
-          <div className="hero-actions">
-            <button className="primary" onClick={open}>
-              Open the workbench
-              <ArrowRight size={17} />
-            </button>
-            <a href="#demo">
-              <Play size={15} />
-              Watch the 2-minute demo
-            </a>
-          </div>
-          <div className="hero-facts">
-            <span>
-              <CheckCircle2 />
-              No sign-in
-            </span>
-            <span>
-              <ShieldCheck />
-              Synthetic data
-            </span>
-            <span>
-              <Braces />
-              Open source
-            </span>
-          </div>
-        </div>
-        <div className="hero-system">
-          <div className="system-top">
-            <span className="status-dot" />
-            RELAY EXECUTION ENGINE<span>01—03</span>
-          </div>
-          <div className="system-goal">
-            <small>THE GOAL</small>
-            <p>“Read this member’s savings balance.”</p>
-          </div>
-          <div className="system-node">
-            <span>01</span>
-            <div>
-              <b>Discover</b>
-              <p>Observe → decide → act</p>
-            </div>
-            <span className="node-tag">LOCAL LLM</span>
-          </div>
-          <div className="system-connector" />
-          <div className="system-node">
-            <span>02</span>
-            <div>
-              <b>Record</b>
-              <p>Typed inputs. Verified checkpoints.</p>
-            </div>
-            <Braces size={21} />
-          </div>
-          <div className="system-connector" />
-          <div className="system-node replay-node">
-            <span>03</span>
-            <div>
-              <b>Replay</b>
-              <p>Saved rules. No model decisions.</p>
-            </div>
-            <CheckCircle2 size={21} />
-          </div>
-          <div className="system-bottom">
-            <Hand size={15} />
-            Blocked? Pause. Hand over. Resume.
-          </div>
-        </div>
-      </div>
-      <div className="landing-proof">
-        <span>FROM INTENT TO EXECUTION</span>
-        <p>Real UI discovery</p>
-        <i />
-        <p>Versioned capabilities</p>
-        <i />
-        <p>Deterministic replay</p>
-        <i />
-        <p>Live-session handoff</p>
-      </div>
-      <div className="landing-section" id="how">
-        <div className="section-intro">
-          <p className="eyebrow">
-            ONE WORKFLOW. THREE DISTINCT RESPONSIBILITIES.
-          </p>
-          <h2>
-            Intelligence at discovery.
-            <br />
-            Control at execution.
-          </h2>
-          <p>
-            Built for the applications that only have a user interface. Explore
-            the complete flow in a local-first banking sandbox.
-          </p>
-        </div>
-        <div className="feature-grid">
+        <div className="principle-list">
           {[
-            {
-              n: '01',
-              title: 'Learn from the live screen',
-              body: 'A local language model chooses actions from the current UI. Every observation and action becomes inspectable evidence.',
-              icon: Workflow,
-            },
-            {
-              n: '02',
-              title: 'Keep the contract',
-              body: 'Store the workflow as a typed, versioned artifact with parameters, outputs, targeting rules and a success checkpoint.',
-              icon: Braces,
-            },
-            {
-              n: '03',
-              title: 'Expect the unexpected',
-              body: 'Separate business outcomes from recoverable errors. Pause uncertain runs and give a person the existing live session.',
-              icon: Hand,
-            },
-          ].map(({ n, title, body, icon: Icon }) => (
+            [
+              '01',
+              'Learn from what’s actually there.',
+              'The model observes the live screen and chooses from permitted actions. Every decision leaves evidence.',
+            ],
+            [
+              '02',
+              'Make a contract, not a guess.',
+              'Typed inputs, precise targets, and a verified checkpoint turn a successful run into a reusable capability.',
+            ],
+            [
+              '03',
+              'Keep a human in the loop.',
+              'When the unexpected happens, pause. Take over the same session, resolve the issue, and return control.',
+            ],
+          ].map(([n, title, body]) => (
             <div key={n}>
+              <span>{n}</span>
               <div>
-                <Icon size={24} />
-                <span>{n}</span>
+                <h3>{title}</h3>
+                <p>{body}</p>
               </div>
-              <h3>{title}</h3>
-              <p>{body}</p>
+              <ArrowUpRight size={17} />
             </div>
           ))}
         </div>
       </div>
-      <div className="demo-section" id="demo">
-        <div>
-          <p className="eyebrow">SEE THE WHOLE LOOP</p>
-          <h2>
-            Two minutes.
-            <br />
-            From goal to evidence.
-          </h2>
+      <div className="demo-section" id="demo" data-reveal>
+        <div className="demo-heading">
+          <div>
+            <p className="eyebrow">A REAL RUN, START TO FINISH</p>
+            <h2>
+              Less explaining.
+              <br />
+              <span>More showing.</span>
+            </h2>
+          </div>
           <p>
-            A recorded walkthrough of the working product: discovery, reusable
-            artifacts, replay, exceptional states and human takeover.
+            Watch discovery, replay, and a human handoff in one two-minute
+            walkthrough.
           </p>
-          <a
-            className="text-link"
-            href="https://github.com/Utsavd7/relay-computer-use/tree/main/evidence"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Inspect the supporting evidence
-            <ArrowUpRight size={15} />
-          </a>
+          <span className="demo-duration">
+            02:00 <Play size={14} fill="currentColor" />
+          </span>
         </div>
         <div className="video-shell">
           <video
@@ -217,40 +364,46 @@ export default function Landing({ open }: { open: () => void }) {
             Your browser does not support embedded video.
           </video>
         </div>
+        <div className="demo-caption">
+          <span>
+            Recorded in the working product · Synthetic training records
+          </span>
+          <a href={`${source}/tree/main/evidence`}>
+            View run evidence <ArrowUpRight size={13} />
+          </a>
+        </div>
       </div>
-      <div className="landing-cta">
+      <div className="landing-cta" data-reveal>
         <div>
-          <p className="eyebrow">TRY IT YOURSELF</p>
+          <p className="eyebrow">YOUR TURN</p>
           <h2>
-            Run the workflow.
+            A good run is
             <br />
-            Inspect every decision.
+            just the beginning.
           </h2>
+        </div>
+        <div>
+          <button className="primary" onClick={open}>
+            Enter the workbench <ArrowUpRight size={18} />
+          </button>
           <p>
-            Replay is ready immediately. Discovery downloads a local model and
-            requires a WebGPU-capable browser.
+            Replay is ready now.
+            <br />
+            Discovery needs WebGPU and a local model download.
           </p>
         </div>
-        <button className="primary" onClick={open}>
-          Enter the workbench
-          <ArrowRight size={17} />
-        </button>
       </div>
       <div className="landing-footer">
-        <a className="brand" href="./">
+        <a href="./" className="brand">
           <img src="favicon.svg" alt="" />
-          relay<span>.</span>
+          relay
         </a>
         <p>
-          Relay · Computer-use automation
-          <br />
-          <small>
-            Training environment only. No real banking integrations.
-          </small>
+          Computer-use, with a memory.
+          <span>Open source. Local first. Human controlled.</span>
         </p>
-        <a href="https://github.com/Utsavd7/relay-computer-use">
-          View repository
-          <ArrowUpRight size={14} />
+        <a href={source} target="_blank" rel="noreferrer">
+          Explore the source <ArrowUpRight size={14} />
         </a>
       </div>
     </div>

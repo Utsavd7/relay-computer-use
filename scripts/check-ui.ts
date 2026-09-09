@@ -25,11 +25,17 @@ try {
       true,
     );
     assert.equal(
-      await page.evaluate(() =>
-        document.fonts.check('16px "Manrope Variable"'),
-      ),
+      await page.evaluate(() => document.fonts.check('16px "DM Sans"')),
       true,
     );
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += 600) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 100));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForTimeout(750);
     await page.screenshot({
       path: `work/ui/landing-${width}.png`,
       fullPage: true,

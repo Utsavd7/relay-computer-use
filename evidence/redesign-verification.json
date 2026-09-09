@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "views": 4,
+      "preview_tabs": 3,
+      "no_overflow": true,
+      "no_page_errors": true
+    },
+    {
+      "width": 390,
+      "views": 4,
+      "preview_tabs": 3,
+      "no_overflow": true,
+      "no_page_errors": true
+    }
+  ],
+  "reduced_motion": true
+}

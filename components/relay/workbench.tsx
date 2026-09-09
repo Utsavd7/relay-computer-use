@@ -311,9 +311,9 @@ export default function Workbench() {
       <aside>
         <a href="./" className="brand">
           <img src="favicon.svg" alt="" />
-          relay<span>.</span>
+          relay
         </a>
-        <small>AUTOMATION WORKSPACE</small>
+        <small>YOUR WORKSPACE</small>
         <nav>
           {nav.map(([id, label, Icon]) => (
             <button
@@ -361,16 +361,16 @@ export default function Workbench() {
               <p className="eyebrow">COMPUTER-USE AUTOMATION</p>
               <h1>
                 {view === 'workbench'
-                  ? 'Teach once. Run reliably.'
+                  ? 'Run with confidence.'
                   : view === 'capabilities'
-                    ? 'A workflow. A clear contract.'
+                    ? 'Your capability library.'
                     : view === 'evidence'
-                      ? 'Every action leaves evidence.'
-                      : 'Permission before execution.'}
+                      ? 'A record of every run.'
+                      : 'Set the boundaries.'}
               </h1>
               <p className="muted">
                 {view === 'workbench'
-                  ? 'Turn a real UI workflow into a capability you can trust.'
+                  ? 'Replay a saved workflow, or discover a new one.'
                   : view === 'capabilities'
                     ? 'Inspect, validate and approve reusable UI capabilities.'
                     : view === 'evidence'
