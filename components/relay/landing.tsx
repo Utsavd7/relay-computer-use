@@ -11,6 +11,7 @@ import {
   ScanLine,
   Fingerprint,
   CornerDownRight,
+  Captions,
 } from 'lucide-react';
 import { exampleArtifact as example } from '@/core/example';
 
@@ -43,7 +44,26 @@ const stages = [
 ];
 export default function Landing({ open }: { open: () => void }) {
   const [stage, setStage] = useState(0);
+  const [captionsOn, setCaptionsOn] = useState(false);
+  const video = useRef<HTMLVideoElement>(null);
   const root = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const tracks = video.current?.textTracks;
+    if (!tracks) return;
+    const syncCaptions = () =>
+      setCaptionsOn(Array.from(tracks).some((track) => track.mode === 'showing'));
+    tracks.addEventListener('change', syncCaptions);
+    syncCaptions();
+    return () => tracks.removeEventListener('change', syncCaptions);
+  }, []);
+  function toggleCaptions() {
+    const tracks = video.current?.textTracks;
+    if (!tracks?.length) return;
+    const enabled = !Array.from(tracks).some((track) => track.mode === 'showing');
+    for (const track of Array.from(tracks))
+      track.mode = enabled ? 'showing' : 'disabled';
+    setCaptionsOn(enabled);
+  }
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) =>
@@ -347,6 +367,8 @@ export default function Landing({ open }: { open: () => void }) {
         </div>
         <div className="video-shell">
           <video
+            id="demo-video"
+            ref={video}
             poster="demo-poster.jpg?v=sharp-4k"
             controls
             preload="metadata"
@@ -359,12 +381,21 @@ export default function Landing({ open }: { open: () => void }) {
               src="demo.vtt"
               srcLang="en"
               label="English"
-              default
             />
             Your browser does not support embedded video.
           </video>
         </div>
         <div className="demo-caption">
+          <button
+            type="button"
+            className="subtitle-toggle"
+            aria-controls="demo-video"
+            aria-pressed={captionsOn}
+            onClick={toggleCaptions}
+          >
+            <Captions size={17} />
+            Subtitles <span>{captionsOn ? 'On' : 'Off'}</span>
+          </button>
           <span>
             Recorded in the working product · Synthetic training records
           </span>

@@ -1,6 +1,6 @@
 # Product walkthrough
 
-The landing page embeds `public/demo.mp4` with English captions from `public/demo.vtt`. It is an actual recording of the functioning application, including genuine local-model discovery; it is not an animation of invented results.
+The landing page embeds `public/demo.mp4` with English captions from `public/demo.vtt`. A visible Subtitles button beneath the video turns captions on or off and stays synchronized with the browser’s native caption controls. It is an actual recording of the functioning application, including genuine local-model discovery; it is not an animation of invented results.
 
 The delivered MP4 is **3840 × 2160 (4K), 105 seconds, H.264 with AAC audio**. The same discovery, artifact, replay, error, handoff, tenant reuse, and evidence sequence is preserved. Pauses between chapters are tightened; the recorded neural speech keeps its natural pace. Capture uses lossless PNG compositor frames from a native 4K browser viewport, with a 2.5× UI scale for legibility. The final H.264 file is encoded once at CRF 16 and 30 fps; the source is not a previously compressed screen recording.
 

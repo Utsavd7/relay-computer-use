@@ -805,11 +805,39 @@ pre,
 }
 .demo-caption {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
   margin-top: 15px;
   color: var(--relay-on-dark-subtle);
   font-size: 10px;
+}
+.subtitle-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 9px 13px;
+  border: 1px solid var(--relay-ink-border);
+  border-radius: 7px;
+  background: var(--relay-ink-raised);
+  color: var(--relay-on-dark);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.subtitle-toggle span { color: var(--relay-on-dark-muted); }
+.subtitle-toggle:hover { background: var(--relay-ink-active); }
+.subtitle-toggle[aria-pressed='true'] {
+  border-color: var(--relay-mint);
+  color: var(--relay-mint);
+}
+.subtitle-toggle[aria-pressed='true'] span { color: var(--relay-mint); }
+.subtitle-toggle:focus-visible {
+  outline: 2px solid var(--relay-mint);
+  outline-offset: 3px;
 }
 .demo-caption a {
   display: flex;
