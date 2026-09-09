@@ -1,0 +1,331 @@
+{
+  "result": {
+    "status": "success",
+    "code": "OK",
+    "step": 4,
+    "model_calls": 5,
+    "assisted": false,
+    "run_id": "49bfe00d-50a1-4819-82da-9f99b5180921",
+    "outputs": {
+      "balance": "[REDACTED]",
+      "currency": "USD"
+    }
+  },
+  "events": [
+    {
+      "time": "2026-09-09T14:27:08.289Z",
+      "type": "discovery.started",
+      "step": 0,
+      "detail": {
+        "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+        "goal": "Look up this member and read their current savings balance.",
+        "route": "/bank.html"
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:08.290Z",
+      "type": "observation",
+      "step": 0,
+      "detail": {
+        "text": " NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSynthetic data only. No real accounts or transactions. ",
+        "controls": [
+          {
+            "ref": 0,
+            "name": "Member ID",
+            "kind": "field",
+            "state": "empty"
+          },
+          {
+            "ref": 1,
+            "name": "Search members",
+            "kind": "control"
+          }
+        ]
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:09.591Z",
+      "type": "model.decision",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": 0,
+        "input": "member_id",
+        "reason": "The Member ID field must be filled before searching for a member to view their savings balance."
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:09.592Z",
+      "type": "action.start",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        },
+        "input": "member_id"
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:09.592Z",
+      "type": "action.complete",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:09.793Z",
+      "type": "observation",
+      "step": 1,
+      "detail": {
+        "text": " NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSynthetic data only. No real accounts or transactions. ",
+        "controls": [
+          {
+            "ref": 0,
+            "name": "Member ID",
+            "kind": "field",
+            "state": "filled"
+          },
+          {
+            "ref": 1,
+            "name": "Search members",
+            "kind": "control"
+          }
+        ]
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:10.717Z",
+      "type": "model.decision",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": 1,
+        "reason": "The user needs to find a member to view their savings balance, so searching for a member is the necessary first step."
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:10.717Z",
+      "type": "action.start",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:10.717Z",
+      "type": "action.complete",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:10.920Z",
+      "type": "observation",
+      "step": 2,
+      "detail": {
+        "text": " NORTHSTAR / CORETraining session · v1.0Member search resultsMember ID[REDACTED]RecordDemo memberOpen memberSynthetic data only. No real accounts or transactions. ",
+        "controls": [
+          {
+            "ref": 0,
+            "name": "Open member",
+            "kind": "control"
+          }
+        ]
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:11.736Z",
+      "type": "model.decision",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": 0,
+        "reason": "Clicking 'Open member' will load the member's details, including their current savings balance."
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:11.737Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:11.737Z",
+      "type": "action.complete",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:11.938Z",
+      "type": "observation",
+      "step": 3,
+      "detail": {
+        "text": " NORTHSTAR / CORETraining session · v1.0Member detailSelect an account to inspect its current balance.Member ID[REDACTED]Account typeSavingsSavings accountSynthetic data only. No real accounts or transactions. ",
+        "controls": [
+          {
+            "ref": 0,
+            "name": "Savings account",
+            "kind": "control"
+          }
+        ]
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:12.815Z",
+      "type": "model.decision",
+      "step": 3,
+      "detail": {
+        "action": "click",
+        "target": 0,
+        "reason": "Clicking the Savings account selects it for balance inspection, which is required before viewing the savings balance."
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:12.815Z",
+      "type": "action.start",
+      "step": 3,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Savings account"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:12.816Z",
+      "type": "action.complete",
+      "step": 3,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Savings account"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:13.018Z",
+      "type": "observation",
+      "step": 4,
+      "detail": {
+        "text": " NORTHSTAR / CORETraining session · v1.0Account overviewAccount available · SavingsMember ID[REDACTED]Savings balance[REDACTED]Back to search Submit transferSynthetic data only. No real accounts or transactions. ",
+        "controls": [
+          {
+            "ref": 0,
+            "name": "Back to search",
+            "kind": "control"
+          },
+          {
+            "ref": 1,
+            "name": "Submit transfer",
+            "kind": "control"
+          },
+          {
+            "ref": 2,
+            "name": "Savings balance",
+            "kind": "text"
+          }
+        ]
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.101Z",
+      "type": "model.decision",
+      "step": 4,
+      "detail": {
+        "action": "read",
+        "target": 2,
+        "reason": "The user's goal is to look up the member and read their current savings balance, and the savings balance field is already visible in the account overview."
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.101Z",
+      "type": "action.start",
+      "step": 4,
+      "detail": {
+        "action": "read",
+        "target": {
+          "kind": "text",
+          "name": "Savings balance"
+        },
+        "output": "balance"
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.102Z",
+      "type": "action.complete",
+      "step": 4,
+      "detail": {
+        "action": "read",
+        "target": {
+          "kind": "text",
+          "name": "Savings balance"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.103Z",
+      "type": "checkpoint.verified",
+      "step": 4,
+      "detail": {
+        "text": "Account overview",
+        "identity": "matched"
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.103Z",
+      "type": "artifact.created",
+      "step": 4,
+      "detail": {
+        "id": "get_savings_balance",
+        "steps": 5
+      }
+    },
+    {
+      "time": "2026-09-09T14:27:14.103Z",
+      "type": "run.completed",
+      "step": 4,
+      "detail": {
+        "status": "success",
+        "code": "OK",
+        "step": 4,
+        "model_calls": 5,
+        "assisted": false,
+        "run_id": "49bfe00d-50a1-4819-82da-9f99b5180921",
+        "outputs": {
+          "balance": "[REDACTED]",
+          "currency": "USD"
+        }
+      }
+    }
+  ]
+}

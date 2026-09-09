@@ -1,0 +1,45 @@
+name: Verify and publish Relay
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: relay-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Verify deterministic browser execution
+        run: |
+          npm run start -- --host 127.0.0.1 --port 4173 > /tmp/relay-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do curl -fsS http://127.0.0.1:4173/ > /dev/null && break || sleep 1; done
+          RELAY_URL='http://127.0.0.1:4173/?app=1' npm run test:e2e
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

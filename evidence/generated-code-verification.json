@@ -1,0 +1,9 @@
+{
+  "command": "node evidence/generated-automation.mjs",
+  "status": "success",
+  "code": "OK",
+  "model_calls": 0,
+  "assisted": false,
+  "run_id": "c0af6d40-1eb8-4c06-8b32-f875e87020d7",
+  "outputs": "[REDACTED]"
+}

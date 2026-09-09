@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00.000 --> 00:10.000
+Relay turns a successful UI workflow into a reusable capability.
+A model discovers the procedure. A deterministic engine runs it again.
+
+00:10.000 --> 00:25.000
+Discovery uses a real local language model.
+It sees the current screen and chooses one permitted action at a time.
+
+00:25.000 --> 00:43.000
+The model searches for the member, opens the account, and reads the balance.
+The executor verifies the final screen and the member identity.
+
+00:43.000 --> 00:56.000
+The result becomes a typed, versioned artifact.
+Inputs, outputs, targets, actions and checkpoints are reviewable.
+
+00:56.000 --> 01:09.000
+Replay uses the same artifact with a different member.
+The balance is extracted from the live UI, with no model decisions.
+
+01:09.000 --> 01:19.000
+A missing member returns a known business outcome.
+It is useful information, not an automation crash.
+
+01:19.000 --> 01:30.000
+An expired session pauses automation and requests intervention.
+The human receives control of the existing live session.
+
+01:30.000 --> 01:40.000
+Restore the session, then return control.
+Automation resumes and verifies the original checkpoint.
+
+01:40.000 --> 01:51.000
+The same capability runs against a second institution's variant,
+using an explicit control-name override.
+
+01:51.000 --> 02:00.000
+Every run produces redacted, inspectable evidence.
+Discover once. Replay with control.

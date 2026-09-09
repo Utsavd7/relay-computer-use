@@ -1,0 +1,923 @@
+{
+  "result": {
+    "status": "failure",
+    "code": "PERMISSION_DENIED",
+    "step": 2,
+    "model_calls": 0,
+    "assisted": false,
+    "run_id": "339fc519-28cb-4e6b-b0af-fa4ae8ed05a3",
+    "expected": "Unique permitted target, declared checkpoint and matching member",
+    "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Permission deniedThis training operator cannot access member records.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
+  },
+  "artifact": {
+    "schema_version": "1.0",
+    "id": "get_savings_balance",
+    "version": 1,
+    "name": "Savings balance",
+    "description": "Read a member savings balance through the live banking UI.",
+    "vendor": "relay-core",
+    "supported_versions": [
+      "1.0",
+      "1.1"
+    ],
+    "inputs": {
+      "member_id": "[REDACTED]"
+    },
+    "outputs": {
+      "balance": "[REDACTED]",
+      "currency": "string"
+    },
+    "steps": [
+      {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        },
+        "input": "member_id"
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Savings account"
+        }
+      },
+      {
+        "action": "read",
+        "target": {
+          "kind": "text",
+          "name": "Savings balance"
+        },
+        "output": "balance"
+      }
+    ],
+    "checkpoint": {
+      "text": "Account overview",
+      "identity_field": "Member ID"
+    },
+    "outcomes": [
+      {
+        "text": "Member not found",
+        "code": "MEMBER_NOT_FOUND"
+      },
+      {
+        "text": "Validation error",
+        "code": "VALIDATION_ERROR"
+      }
+    ],
+    "recoveries": [
+      {
+        "text": "Temporary connection error",
+        "target": {
+          "kind": "control",
+          "name": "Retry load"
+        },
+        "max_attempts": 2
+      },
+      {
+        "text": "Service notice",
+        "target": {
+          "kind": "control",
+          "name": "Dismiss notice"
+        },
+        "max_attempts": 1
+      }
+    ],
+    "provenance": {
+      "kind": "llm-discovery",
+      "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+      "created_at": "2026-09-09T14:27:14.102Z",
+      "run_id": "49bfe00d-50a1-4819-82da-9f99b5180921"
+    },
+    "approval": {
+      "state": "draft",
+      "successful_replays": 0,
+      "failed_replays": 1,
+      "reviewer": null
+    }
+  },
+  "events": [
+    {
+      "time": "2026-09-09T14:35:15.944Z",
+      "type": "replay.started",
+      "step": 0,
+      "detail": {
+        "artifact": "get_savings_balance",
+        "version": 1,
+        "tenant": "northstar",
+        "mode": "deterministic"
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:15.945Z",
+      "type": "action.start",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        },
+        "input": "member_id"
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:15.945Z",
+      "type": "action.complete",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:15.945Z",
+      "type": "action.start",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:15.945Z",
+      "type": "action.complete",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:15.945Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.047Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.148Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.250Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.352Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.453Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.555Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.657Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.758Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.859Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:16.961Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.062Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.163Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.265Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.368Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.470Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.572Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.675Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.776Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.877Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:17.980Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.081Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.183Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.285Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.387Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.489Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.590Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.691Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.792Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.893Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:18.994Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.095Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.198Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.299Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.401Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.503Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.604Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.706Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.807Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:19.908Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.008Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.109Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.210Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.311Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.412Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.513Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.614Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.715Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.817Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:20.918Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.020Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.122Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.223Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.325Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.426Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.527Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.628Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.729Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.830Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:21.932Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:22.034Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:22.035Z",
+      "type": "run.completed",
+      "step": 2,
+      "detail": {
+        "status": "failure",
+        "code": "PERMISSION_DENIED",
+        "step": 2,
+        "model_calls": 0,
+        "assisted": false,
+        "run_id": "339fc519-28cb-4e6b-b0af-fa4ae8ed05a3",
+        "expected": "Unique permitted target, declared checkpoint and matching member",
+        "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Permission deniedThis training operator cannot access member records.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
+      }
+    }
+  ]
+}

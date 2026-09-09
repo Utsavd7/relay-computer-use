@@ -1,0 +1,139 @@
+{
+  "timestamp": "2026-09-09T14:35:49.022Z",
+  "checks": [
+    {
+      "name": "replay",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "not-found",
+      "status": "business_outcome",
+      "code": "MEMBER_NOT_FOUND",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "invalid-input",
+      "status": "failure",
+      "code": "INVALID_INPUT",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "slow",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "transient",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "dialog",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "tenant-harbor",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "ambiguous-target",
+      "status": "failure",
+      "code": "AMBIGUOUS_TARGET",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "permission-denied",
+      "status": "failure",
+      "code": "PERMISSION_DENIED",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "unknown-error",
+      "status": "failure",
+      "code": "TARGET_NOT_FOUND",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "approval-gate",
+      "status": "failure",
+      "code": "APPROVAL_REQUIRED",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "handoff",
+      "status": "success",
+      "same_session": true,
+      "human_action_capture": true,
+      "model_calls": 0
+    },
+    {
+      "name": "aborted",
+      "status": "expected-cancellation"
+    },
+    {
+      "name": "stability-1",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "stability-2",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "stability-3",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "stability-4",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "stability-5",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 0,
+      "assisted": false
+    },
+    {
+      "name": "assisted-recovery",
+      "status": "success",
+      "code": "OK",
+      "model_calls": 1,
+      "assisted": true
+    },
+    {
+      "name": "risky-action-blocked",
+      "status": "blocked-before-click"
+    }
+  ]
+}

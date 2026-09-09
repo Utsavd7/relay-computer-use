@@ -1,0 +1,933 @@
+{
+  "result": {
+    "status": "failure",
+    "code": "CANCELLED",
+    "step": 2,
+    "model_calls": 0,
+    "assisted": false,
+    "run_id": "b7083f61-161e-4335-bcf7-9f5cb48dc350",
+    "expected": "Unique permitted target, declared checkpoint and matching member",
+    "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Unexpected application errorThe application cannot continue.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
+  },
+  "artifact": {
+    "schema_version": "1.0",
+    "id": "get_savings_balance",
+    "version": 1,
+    "name": "Savings balance",
+    "description": "Read a member savings balance through the live banking UI.",
+    "vendor": "relay-core",
+    "supported_versions": [
+      "1.0",
+      "1.1"
+    ],
+    "inputs": {
+      "member_id": "[REDACTED]"
+    },
+    "outputs": {
+      "balance": "[REDACTED]",
+      "currency": "string"
+    },
+    "steps": [
+      {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        },
+        "input": "member_id"
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      },
+      {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Savings account"
+        }
+      },
+      {
+        "action": "read",
+        "target": {
+          "kind": "text",
+          "name": "Savings balance"
+        },
+        "output": "balance"
+      }
+    ],
+    "checkpoint": {
+      "text": "Account overview",
+      "identity_field": "Member ID"
+    },
+    "outcomes": [
+      {
+        "text": "Member not found",
+        "code": "MEMBER_NOT_FOUND"
+      },
+      {
+        "text": "Validation error",
+        "code": "VALIDATION_ERROR"
+      }
+    ],
+    "recoveries": [
+      {
+        "text": "Temporary connection error",
+        "target": {
+          "kind": "control",
+          "name": "Retry load"
+        },
+        "max_attempts": 2
+      },
+      {
+        "text": "Service notice",
+        "target": {
+          "kind": "control",
+          "name": "Dismiss notice"
+        },
+        "max_attempts": 1
+      }
+    ],
+    "provenance": {
+      "kind": "llm-discovery",
+      "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+      "created_at": "2026-09-09T14:27:14.102Z",
+      "run_id": "49bfe00d-50a1-4819-82da-9f99b5180921"
+    },
+    "approval": {
+      "state": "draft",
+      "successful_replays": 0,
+      "failed_replays": 1,
+      "reviewer": null
+    }
+  },
+  "events": [
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "replay.started",
+      "step": 0,
+      "detail": {
+        "artifact": "get_savings_balance",
+        "version": 1,
+        "tenant": "northstar",
+        "mode": "deterministic"
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "action.start",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        },
+        "input": "member_id"
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "action.complete",
+      "step": 0,
+      "detail": {
+        "action": "fill",
+        "target": {
+          "kind": "field",
+          "name": "Member ID"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "action.start",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "action.complete",
+      "step": 1,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Search members"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.789Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.891Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:34.991Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.092Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.193Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.295Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.397Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.498Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.600Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.701Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.803Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:35.905Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.006Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.107Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.208Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.309Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.410Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.511Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.613Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.714Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.816Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:36.918Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.020Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.122Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.223Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.324Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.425Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.526Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.627Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.728Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.829Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:37.931Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.033Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.134Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.236Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.338Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.439Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.540Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.641Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.742Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.844Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:38.945Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.046Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.148Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.250Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.352Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.453Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.555Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.657Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.758Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.859Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:39.960Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.061Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.163Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.265Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.367Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.468Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.570Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.671Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.773Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.873Z",
+      "type": "action.start",
+      "step": 2,
+      "detail": {
+        "action": "click",
+        "target": {
+          "kind": "control",
+          "name": "Open member"
+        }
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:40.874Z",
+      "type": "control.transferred",
+      "step": 2,
+      "detail": {
+        "owner": "human",
+        "reason": "TARGET_NOT_FOUND",
+        "evidence": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Unexpected application errorThe application cannot continue.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
+      }
+    },
+    {
+      "time": "2026-09-09T14:35:41.060Z",
+      "type": "run.completed",
+      "step": 2,
+      "detail": {
+        "status": "failure",
+        "code": "CANCELLED",
+        "step": 2,
+        "model_calls": 0,
+        "assisted": false,
+        "run_id": "b7083f61-161e-4335-bcf7-9f5cb48dc350",
+        "expected": "Unique permitted target, declared checkpoint and matching member",
+        "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Unexpected application errorThe application cannot continue.Synthetic data only. No real accounts or transactions. \",\n  \"controls\": []\n}"
+      }
+    }
+  ]
+}

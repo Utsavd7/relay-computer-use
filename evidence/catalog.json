@@ -1,0 +1,19 @@
+[
+  {
+    "name": "get_savings_balance",
+    "description": "Read a member savings balance through the live banking UI.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string",
+          "pattern": "^\\d{5}$"
+        }
+      },
+      "required": [
+        "member_id"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

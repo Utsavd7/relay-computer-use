@@ -1,0 +1,18 @@
+[
+  {
+    "width": 1440,
+    "landing": true,
+    "replay": true,
+    "no_horizontal_overflow": true,
+    "font_loaded": true,
+    "no_page_errors": true
+  },
+  {
+    "width": 390,
+    "landing": true,
+    "replay": true,
+    "no_horizontal_overflow": true,
+    "font_loaded": true,
+    "no_page_errors": true
+  }
+]

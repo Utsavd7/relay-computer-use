@@ -1,0 +1,68 @@
+{
+  "runs": 5,
+  "successes": 5,
+  "observed_success_rate": 1,
+  "confidence_note": "Five deterministic local runs; not a statistical production guarantee.",
+  "results": [
+    {
+      "status": "success",
+      "code": "OK",
+      "step": 5,
+      "model_calls": 0,
+      "assisted": false,
+      "run_id": "71d32de9-c298-40de-b2b3-234a076bcd66",
+      "outputs": {
+        "balance": "[REDACTED]",
+        "currency": "USD"
+      }
+    },
+    {
+      "status": "success",
+      "code": "OK",
+      "step": 5,
+      "model_calls": 0,
+      "assisted": false,
+      "run_id": "d3428166-009f-435c-baac-3496637159a9",
+      "outputs": {
+        "balance": "[REDACTED]",
+        "currency": "USD"
+      }
+    },
+    {
+      "status": "success",
+      "code": "OK",
+      "step": 5,
+      "model_calls": 0,
+      "assisted": false,
+      "run_id": "50ad0a27-abe3-4915-a804-3437c57714bc",
+      "outputs": {
+        "balance": "[REDACTED]",
+        "currency": "USD"
+      }
+    },
+    {
+      "status": "success",
+      "code": "OK",
+      "step": 5,
+      "model_calls": 0,
+      "assisted": false,
+      "run_id": "f32fb817-b7bc-44bb-b3b4-0075f142c1eb",
+      "outputs": {
+        "balance": "[REDACTED]",
+        "currency": "USD"
+      }
+    },
+    {
+      "status": "success",
+      "code": "OK",
+      "step": 5,
+      "model_calls": 0,
+      "assisted": false,
+      "run_id": "95c05b43-0ddb-4b60-9b16-9110c626c812",
+      "outputs": {
+        "balance": "[REDACTED]",
+        "currency": "USD"
+      }
+    }
+  ]
+}

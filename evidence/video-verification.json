@@ -1,0 +1,15 @@
+{
+  "duration_seconds": 120,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "width": 1440,
+  "height": 960,
+  "captions": "public/demo.vtt",
+  "source": "Actual live UI recording",
+  "recording": {
+    "duration_ms": 120009,
+    "discovery_model_calls": 5,
+    "replay_model_calls": 0,
+    "handoff_status": "success"
+  }
+}
