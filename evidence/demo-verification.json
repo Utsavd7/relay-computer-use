@@ -1,5 +1,5 @@
 {
-  "duration_ms": 105005,
+  "duration_ms": 105000,
   "discovery_model_calls": 5,
   "replay_model_calls": 0,
   "handoff_status": "success",
@@ -8,5 +8,11 @@
   "synthesized_narration": true,
   "speed_adjustment": false,
   "width": 3840,
-  "height": 2160
+  "height": 2160,
+  "capture": "lossless PNG compositor frames",
+  "frames": 668,
+  "frame_rate": 30,
+  "encoding_crf": 16,
+  "ui_scale": 2.5,
+  "opening_stage": "Discover"
 }

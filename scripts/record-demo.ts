@@ -1,13 +1,13 @@
 import { chromium } from '@playwright/test';
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { messages, resolveDecision } from '../core/models';
 import { redact } from '../core/privacy';
+import { captureFrames } from './capture-frames';
 await mkdir('work/demo', { recursive: true });
 const artifact = JSON.parse(await readFile('evidence/capability.json', 'utf8'));
 const browser = await chromium.launch();
 const context = await browser.newContext({
   viewport: { width: 3840, height: 2160 },
-  recordVideo: { dir: 'work/demo', size: { width: 3840, height: 2160 } },
 });
 const page = await context.newPage();
 const exchanges: any[] = [];
@@ -42,12 +42,38 @@ const base = process.env.RELAY_URL || 'http://localhost:3000/';
 await page.addInitScript(() => {
   if (window === window.top)
     document.addEventListener('DOMContentLoaded', () => {
-      document.body.style.zoom = '2';
+      document.body.style.zoom = '2.5';
     });
 });
 await page.goto(base);
 await page.locator('.hero h1').waitFor();
-const started = Date.now();
+await page.evaluate(() => document.fonts.ready);
+// Recording-only framing: hide surrounding marketing and summary chrome, not target data.
+await page.addStyleTag({
+  content: `
+  .landing { min-height:864px; }
+  .landing > :not(.landing-nav):not(.hero) { display:none!important; }
+  .hero > :not(.product-stage) { display:none!important; }
+  .hero { padding:44px 60px 90px!important; }
+  .product-stage { margin:0!important; }
+  .workspace .title-row, .workspace .metrics, .workspace .options-row, .workspace footer { display:none!important; }
+  .workspace header { height:44px; }
+  .workspace article { padding:18px 24px 85px; }
+  .workspace .run-heading { padding:10px 20px; }
+  .workspace .goal-field { padding:12px 20px 0; }
+  .workspace .goal-field textarea { height:54px; min-height:54px; }
+  .workspace .goal-field p { display:none; }
+  .workspace .form { padding:14px 20px; }
+  .workspace section > h2 { height:44px; }
+  .workspace .frame-wrap { height:340px; }
+  .workspace .timeline { height:413px; }
+  html { scroll-behavior: auto!important; }
+`,
+});
+await page.evaluate(() => window.scrollTo(0, 0));
+await page.waitForTimeout(500);
+const capture = await captureFrames(page, 'work/demo');
+const started = capture.started;
 const at = async (seconds: number) => {
   const delay = seconds * 1000 - (Date.now() - started);
   if (delay > 0) await page.waitForTimeout(delay);
@@ -76,11 +102,11 @@ try {
   await chapter('RELAY', 'Discover a workflow. Make it repeatable.');
   await at(9.1);
   await page
-    .getByRole('button', { name: 'Open the workbench', exact: true })
+    .getByRole('button', { name: 'Try a real run', exact: true })
     .click();
   await page.waitForFunction(() => !!(window as any).relay);
   await page.evaluate(() => {
-    document.body.style.zoom = '2';
+    document.body.style.zoom = '2.5';
   });
   await chapter('01 / DISCOVERY', 'A real local model operates the live UI');
   await page.getByRole('tab', { name: 'Discover', exact: true }).click();
@@ -187,11 +213,14 @@ try {
     'work/demo/model-exchanges.json',
     JSON.stringify(exchanges, null, 2),
   );
+  const captureInfo = await capture.stop(105);
   await writeFile(
     'work/demo/timing.json',
     JSON.stringify(
       {
-        duration_ms: Date.now() - started,
+        duration_ms: 105000,
+        capture: 'lossless PNG compositor frames',
+        ...captureInfo,
         discovery_model_calls: discovery.result.model_calls,
         replay_model_calls: replay.result.model_calls,
         handoff_status: handed.result.status,
@@ -201,8 +230,6 @@ try {
     ),
   );
 } finally {
-  const video = page.video();
   await context.close();
-  if (video) await copyFile(await video.path(), 'work/demo/source.webm');
   await browser.close();
 }

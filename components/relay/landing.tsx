@@ -347,13 +347,13 @@ export default function Landing({ open }: { open: () => void }) {
         </div>
         <div className="video-shell">
           <video
-            poster="demo-poster.jpg"
+            poster="demo-poster.jpg?v=sharp-4k"
             controls
             preload="metadata"
             playsInline
             aria-label="Relay 4K product walkthrough, one minute forty-five seconds"
           >
-            <source src="demo.mp4" type="video/mp4" />
+            <source src="demo.mp4?v=sharp-4k" type="video/mp4" />
             <track
               kind="captions"
               src="demo.vtt"

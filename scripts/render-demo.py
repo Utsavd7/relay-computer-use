@@ -37,7 +37,9 @@ def stamp(s):
 asyncio.run(narrate())
 args=argparse.ArgumentParser();args.add_argument('--audio-only',action='store_true');options=args.parse_args()
 filters=[];streams=[];command=['ffmpeg','-y']
-if not options.audio_only:command+=['-i',str(folder/'source.webm')]
+if not options.audio_only:
+ if (folder/'capture.ffconcat').exists():command+=['-f','concat','-safe','0','-i',str(folder/'capture.ffconcat')]
+ else:command+=['-i',str(folder/'source.webm')]
 offset=0 if options.audio_only else 1
 vtt=['WEBVTT',''];timings=[]
 for i,(start,end,text) in enumerate(chapters):
@@ -56,7 +58,7 @@ command+=['-filter_complex',';'.join(filters)]
 if not options.audio_only:command+=['-map','0:v']
 command+=['-map','[audio]','-t','105']
 if options.audio_only:command+=['-c:a','libmp3lame','-b:a','192k',str(folder/'narration.mp3')]
-else:command+=['-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart','public/demo.mp4']
+else:command+=['-c:v','libx264','-preset','medium','-crf','16','-r','30','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart','public/demo.mp4']
 subprocess.run(command,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 (folder/'narration-timing.json').write_text(json.dumps({'voice':voice,'chapters':timings},indent=2))
 Path('public/demo.vtt').write_text('\n'.join(vtt))
