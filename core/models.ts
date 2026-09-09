@@ -100,7 +100,15 @@ export async function browserModel(
         temperature: 0,
         max_tokens: 200,
         extra_body: { enable_thinking: false },
-        response_format: { type: 'json_object' },
+        response_format: {
+          type: 'json_object',
+          schema: JSON.stringify({
+            type: 'object',
+            properties: { choice: { type: 'integer' }, reason: { type: 'string' } },
+            required: ['choice', 'reason'],
+            additionalProperties: false,
+          }),
+        },
       });
       return resolveDecision(
         response.choices[0]?.message.content || '',

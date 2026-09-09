@@ -3,6 +3,7 @@
 These are captured executions against the running, nested-frame banking sandbox. All records are synthetic. Identifiers and returned balance values are redacted at the persistence boundary.
 
 - `discover/`: genuine local MLX Qwen3-4B discovery. Five live model decisions complete the search → member → savings account → read workflow. Model exchanges include prompts, responses and usage.
+- `browser-discovery/`: independent successful WebGPU Qwen3-4B discovery in Chromium, using five real model decisions and cached device-local weights.
 - `capability.json`: the typed artifact emitted by that discovery, also bundled into the app.
 - `replay/`: the artifact replayed with a different member, with zero model calls.
 - `not-found/`, `invalid-input/`, `slow/`, `transient/`, `dialog/`, `permission-denied/`, `unknown-error/`, `ambiguous-target/`: deliberate outcomes and exceptional states.

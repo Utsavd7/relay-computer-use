@@ -125,13 +125,14 @@ export default function Workbench() {
   async function reset(s = scenario, t = tenant) {
     const f = frame.current;
     if (!f) throw Error('SESSION_UNAVAILABLE');
-    f.src = `bank.html?tenant=${encodeURIComponent(t)}&scenario=${encodeURIComponent(s)}&session=${Date.now()}`;
-    for (let i = 0; i < 100; i++) {
+    const session = crypto.randomUUID();
+    f.src = `bank.html?tenant=${encodeURIComponent(t)}&scenario=${encodeURIComponent(s)}&session=${session}`;
+    for (let i = 0; i < 250; i++) {
       await pause(60);
       const inner = f.contentDocument?.querySelector('iframe')?.contentDocument;
       if (
         inner?.querySelector('input') &&
-        inner.URL.includes(`scenario=${encodeURIComponent(s)}`)
+        new URL(inner.URL).searchParams.get('session') === session
       )
         return;
     }

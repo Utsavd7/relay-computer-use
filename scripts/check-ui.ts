@@ -11,7 +11,11 @@ try {
     });
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));
-    await page.goto('http://127.0.0.1:4173/');
+    await page.route('**/bank-frame.html*', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      await route.continue();
+    });
+    await page.goto(process.env.RELAY_URL || 'http://127.0.0.1:4173/');
     await page.locator('.hero h1').waitFor();
     await page.evaluate(() => document.fonts.ready);
     assert.equal(
