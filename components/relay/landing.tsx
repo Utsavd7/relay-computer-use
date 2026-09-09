@@ -42,7 +42,7 @@ const stages = [
   },
 ];
 export default function Landing({ open }: { open: () => void }) {
-  const [stage, setStage] = useState(2);
+  const [stage, setStage] = useState(0);
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
