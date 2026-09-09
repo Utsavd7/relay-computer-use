@@ -5,7 +5,7 @@
     "step": 1,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "1fa73a60-5c0e-459a-a313-f23f929889e8",
+    "run_id": "3bc2ab62-6ece-40db-ba59-e7a2fdd91871",
     "expected": "Unique permitted target, declared checkpoint and matching member",
     "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSearch membersSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Member ID\",\n      \"kind\": \"field\",\n      \"state\": \"filled\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 2,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    }\n  ]\n}"
   },
@@ -106,14 +106,14 @@
     },
     "approval": {
       "state": "draft",
-      "successful_replays": 0,
-      "failed_replays": 1,
+      "successful_replays": 5,
+      "failed_replays": 2,
       "reviewer": null
     }
   },
   "events": [
     {
-      "time": "2026-09-09T15:34:45.056Z",
+      "time": "2026-09-09T17:15:19.640Z",
       "type": "replay.started",
       "step": 0,
       "detail": {
@@ -124,7 +124,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:45.056Z",
+      "time": "2026-09-09T17:15:19.640Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -137,7 +137,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:45.056Z",
+      "time": "2026-09-09T17:15:19.640Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -149,7 +149,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:45.056Z",
+      "time": "2026-09-09T17:15:19.640Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -161,7 +161,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:45.056Z",
+      "time": "2026-09-09T17:15:19.641Z",
       "type": "run.completed",
       "step": 1,
       "detail": {
@@ -170,7 +170,7 @@
         "step": 1,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "1fa73a60-5c0e-459a-a313-f23f929889e8",
+        "run_id": "3bc2ab62-6ece-40db-ba59-e7a2fdd91871",
         "expected": "Unique permitted target, declared checkpoint and matching member",
         "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSearch membersSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Member ID\",\n      \"kind\": \"field\",\n      \"state\": \"filled\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    },\n    {\n      \"ref\": 2,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    }\n  ]\n}"
       }

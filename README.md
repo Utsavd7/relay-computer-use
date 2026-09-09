@@ -149,7 +149,7 @@ The repository includes the required source, README, seven-heading REPORT, and e
 
 ### Limits worth understanding
 
-Only the savings-balance capability profile is implemented; arbitrary goals with different output contracts require a new profile. The browser adapter controls the same-origin sandbox, not arbitrary cross-origin websites. Desktop support and institution-scale tenancy are designs, not implemented products. Approvals are device-local review markers; a real deployment would need authenticated reviewers, signed artifacts, authorization, and encrypted institutional storage. Risk classification uses an explicit small deny rule set alongside route/action allowlists; it is not a general semantic safety classifier. See REPORT.md for the complete boundaries.
+Only the savings-balance capability profile is implemented; arbitrary goals with different output contracts require a new profile. The browser adapter controls the same-origin sandbox, not arbitrary cross-origin websites. Desktop support and institution-scale tenancy are designs, not implemented products. Approvals are device-local review markers; a real deployment would need authenticated reviewers, signed artifacts, authorization, and encrypted institutional storage. The adapter permits only the named controls and exact routes of this workflow, rejects form submissions and unknown or inaccessible frames, and validates policy limits. Static builds also enforce a Content Security Policy. See [security controls and verification](docs/SECURITY.md). See REPORT.md for the complete boundaries.
 
 ### Primary references
 

@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-09-09T17:15:43.918Z",
+  "checks": [
+    {
+      "name": "route-prefix-bypass",
+      "code": "POLICY_ROUTE_DENIED"
+    },
+    {
+      "name": "out-of-policy-read",
+      "code": "POLICY_ROUTE_DENIED"
+    },
+    {
+      "name": "disabled-control",
+      "code": "POLICY_CONTROL_UNAVAILABLE"
+    },
+    {
+      "name": "password-field",
+      "code": "POLICY_FIELD_DENIED"
+    },
+    {
+      "name": "unknown-control",
+      "code": "POLICY_CONTROL_DENIED"
+    },
+    {
+      "name": "link-disguised-as-control",
+      "code": "POLICY_CONTROL_TYPE"
+    },
+    {
+      "name": "form-submission",
+      "code": "POLICY_NAVIGATION_DENIED"
+    },
+    {
+      "name": "opaque-frame",
+      "code": "POLICY_FRAME_DENIED"
+    },
+    {
+      "name": "inline-script-injection",
+      "code": "CSP_BLOCKED"
+    },
+    {
+      "name": "snapshot-reference-isolation",
+      "code": "ISOLATED"
+    },
+    {
+      "name": "forged-caller-approval",
+      "code": "APPROVAL_REQUIRED"
+    },
+    {
+      "name": "reset-during-owned-session",
+      "code": "SESSION_BUSY"
+    }
+  ]
+}

@@ -6,21 +6,30 @@ import type {
   Policy,
   Surface,
 } from './schema';
-import { defaultPolicy } from './schema';
+import { defaultPolicy, PolicySchema, safeControls } from './schema';
 import { redact } from './privacy';
 function documents(root: Document): Document[] {
   return [
     root,
     ...Array.from(root.querySelectorAll('iframe')).flatMap((f) => {
       try {
-        return f.contentDocument ? documents(f.contentDocument) : [];
+        if (!f.contentDocument) throw Error('POLICY_FRAME_DENIED');
+        return documents(f.contentDocument);
       } catch {
-        return [];
+        throw Error('POLICY_FRAME_DENIED');
       }
     }),
   ];
 }
-const visible = (e: Element) => !!(e as HTMLElement).getClientRects().length;
+const visible = (e: Element) => {
+  const style = e.ownerDocument.defaultView!.getComputedStyle(e);
+  return (
+    !!e.getClientRects().length &&
+    style.visibility === 'visible' &&
+    style.display !== 'none' &&
+    !e.closest('[inert]')
+  );
+};
 const name = (e: Element) =>
   e.getAttribute('aria-label') ||
   (e instanceof e.ownerDocument.defaultView!.HTMLInputElement
@@ -37,14 +46,20 @@ function elements(d: Document) {
   );
 }
 export class BrowserSurface implements Surface {
+  private base: URL;
   constructor(
     private root: () => Document,
     private policy: Policy = defaultPolicy,
-  ) {}
+  ) {
+    this.policy = PolicySchema.parse(policy);
+    this.base = new URL('.', this.root().URL);
+    this.check();
+  }
   route() {
     return new URL(this.root().URL).pathname;
   }
   version() {
+    this.check();
     return (
       documents(this.root())
         .map((d) => d.documentElement.getAttribute('data-version'))
@@ -55,29 +70,38 @@ export class BrowserSurface implements Surface {
     for (const d of documents(this.root())) {
       const u = new URL(d.URL);
       if (
-        u.origin !== new URL(this.root().URL).origin ||
-        !this.policy.routes.some((r) => u.pathname.endsWith(r))
+        u.origin !== this.base.origin ||
+        !this.policy.routes.some(
+          (r) => u.pathname === new URL(r.slice(1), this.base).pathname,
+        )
       )
         throw Error('POLICY_ROUTE_DENIED');
     }
   }
   async observe(): Promise<Observation> {
     this.check();
-    const controls = elements(this.root()).map((e, ref) => ({
-      ref,
-      name: name(e).trim(),
-      kind: (e.tagName === 'INPUT' ? 'field' : 'control') as
-        | 'field'
-        | 'control'
-        | 'text',
-      ...(e.tagName === 'INPUT'
-        ? {
-            state: ((e as HTMLInputElement).value ? 'filled' : 'empty') as
-              | 'empty'
-              | 'filled',
-          }
-        : {}),
-    }));
+    const controls = elements(this.root())
+      .filter((e) =>
+        (e.tagName === 'INPUT'
+          ? safeControls.fill
+          : safeControls.click
+        ).includes(name(e).trim()),
+      )
+      .map((e, ref) => ({
+        ref,
+        name: name(e).trim(),
+        kind: (e.tagName === 'INPUT' ? 'field' : 'control') as
+          | 'field'
+          | 'control'
+          | 'text',
+        ...(e.tagName === 'INPUT'
+          ? {
+              state: ((e as HTMLInputElement).value ? 'filled' : 'empty') as
+                | 'empty'
+                | 'filled',
+            }
+          : {}),
+      }));
     const texts = documents(this.root())
       .map((d) => {
         const c = d.body.cloneNode(true) as HTMLElement;
@@ -127,15 +151,34 @@ export class BrowserSurface implements Surface {
       throw Error('POLICY_ACTION_DENIED');
     const e = this.resolve(action.target);
     if (
+      !visible(e) ||
+      e.matches(':disabled') ||
+      (action.action === 'fill' && e.hasAttribute('readonly'))
+    )
+      throw Error('POLICY_CONTROL_UNAVAILABLE');
+    if (
       /submit transfer|delete|finalize|send money|close account/i.test(name(e))
     )
       throw Error('POLICY_RISKY_ACTION');
+    if (!safeControls[action.action].includes(action.target.name))
+      throw Error('POLICY_CONTROL_DENIED');
     if (action.action === 'click') {
+      if (action.target.kind !== 'control' || e.tagName !== 'BUTTON')
+        throw Error('POLICY_CONTROL_TYPE');
+      const button = e as HTMLButtonElement;
+      if (button.form && button.type === 'submit')
+        throw Error('POLICY_NAVIGATION_DENIED');
       (e as HTMLElement).click();
       return;
     }
     if (action.action === 'fill') {
-      if (e.tagName !== 'INPUT' || (e as HTMLInputElement).type === 'password')
+      if (
+        action.target.kind !== 'field' ||
+        e.tagName !== 'INPUT' ||
+        !['text', 'search', 'number', 'tel'].includes(
+          (e as HTMLInputElement).type,
+        )
+      )
         throw Error('POLICY_FIELD_DENIED');
       (e as HTMLInputElement).value = params[action.input];
       e.dispatchEvent(
@@ -143,6 +186,8 @@ export class BrowserSurface implements Surface {
       );
       return;
     }
+    if (action.target.kind !== 'text' || !['TD', 'TH'].includes(e.tagName))
+      throw Error('POLICY_CONTROL_TYPE');
     const value = e.nextElementSibling?.textContent?.trim() || '';
     const match = value.match(/^([A-Z]{3})\s+([\d,]+\.\d{2})$/);
     if (!match) throw Error('OUTPUT_SHAPE_MISMATCH');
@@ -152,11 +197,13 @@ export class BrowserSurface implements Surface {
     };
   }
   async has(text: string) {
+    this.check();
     return documents(this.root()).some((d) =>
       (d.body.innerText || '').includes(text),
     );
   }
   async identity() {
+    this.check();
     for (const d of documents(this.root())) {
       const cell = Array.from(d.querySelectorAll('td,th')).find(
         (e) =>

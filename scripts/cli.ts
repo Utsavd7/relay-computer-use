@@ -15,7 +15,14 @@ const endpoint =
 const modelName =
   process.env.MODEL_NAME || 'mlx-community/Qwen3-4B-Instruct-2507-4bit';
 // Paid providers are deliberately unsupported by the bundled CLI.
-const host = new URL(endpoint).hostname;
+const modelURL = new URL(endpoint);
+const host = modelURL.hostname;
+if (
+  !['http:', 'https:'].includes(modelURL.protocol) ||
+  modelURL.username ||
+  modelURL.password
+)
+  throw Error('MODEL_URL must be an HTTP loopback URL without credentials.');
 if (!['localhost', '127.0.0.1', '[::1]'].includes(host))
   throw Error('MODEL_URL must point to a local model server.');
 const browser = await chromium.launch({
@@ -24,37 +31,47 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 const modelRecords: unknown[] = [];
 try {
-  await page.exposeFunction(
-    'relayModel',
-    async (goal: string, observation: any, history: unknown[]) => {
-      const request = {
-        model: modelName,
-        messages: messages(goal, observation, history),
-        temperature: 0,
-        max_tokens: 220,
-        stream: false,
-      };
-      const start = Date.now();
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(request),
-        signal: AbortSignal.timeout(120000),
-      });
-      if (!response.ok) throw Error(`LOCAL_MODEL_HTTP_${response.status}`);
-      const data: any = await response.json();
-      const content = data.choices[0].message.content;
-      modelRecords.push(
-        redact({
-          timestamp: new Date().toISOString(),
-          duration_ms: Date.now() - start,
-          request,
-          response: { model: data.model, content, usage: data.usage },
-        }),
-      );
-      return resolveDecision(content, observation, history);
-    },
-  );
+  if (command === 'discover' || process.argv.includes('--assisted'))
+    await page.exposeBinding(
+      'relayModel',
+      async (source, goal: string, observation: any, history: unknown[]) => {
+        const expected = new URL(url),
+          current = new URL(source.frame.url());
+        if (
+          source.frame !== page.mainFrame() ||
+          current.origin !== expected.origin ||
+          current.pathname !== expected.pathname
+        )
+          throw Error('MODEL_BRIDGE_FRAME_DENIED');
+        const request = {
+          model: modelName,
+          messages: messages(goal, observation, history),
+          temperature: 0,
+          max_tokens: 220,
+          stream: false,
+        };
+        const start = Date.now();
+        const response = await fetch(endpoint, {
+          redirect: 'error',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(request),
+          signal: AbortSignal.timeout(120000),
+        });
+        if (!response.ok) throw Error(`LOCAL_MODEL_HTTP_${response.status}`);
+        const data: any = await response.json();
+        const content = data.choices[0].message.content;
+        modelRecords.push(
+          redact({
+            timestamp: new Date().toISOString(),
+            duration_ms: Date.now() - start,
+            request,
+            response: { model: data.model, content, usage: data.usage },
+          }),
+        );
+        return resolveDecision(content, observation, history);
+      },
+    );
   await page.addInitScript((name) => {
     (window as any).relayModelName = name;
   }, modelName);

@@ -28,6 +28,7 @@ import {
   Runner,
   approve,
   recordValidation,
+  reuseLocalReview,
   exportAutomation,
   catalogDescription,
   type Intervention,
@@ -35,6 +36,8 @@ import {
 import { BrowserSurface } from '@/core/surface';
 import {
   ArtifactSchema,
+  PolicySchema,
+  importArtifact,
   defaultPolicy,
   type Artifact,
   type Event,
@@ -175,20 +178,12 @@ export default function Workbench() {
     setIntervention(null);
     setNotice('');
     try {
+      suppliedArtifact = reuseLocalReview(
+        suppliedArtifact,
+        artifactRef.current,
+      );
       await reset(opts.scenario || scenario, opts.tenant || tenant);
-      const policy = JSON.parse(policyText);
-      if (
-        !Array.isArray(policy.routes) ||
-        !Array.isArray(policy.actions) ||
-        !Number.isFinite(policy.timeout_ms) ||
-        policy.timeout_ms < 100 ||
-        policy.timeout_ms > 30000 ||
-        policy.max_steps < 1 ||
-        policy.max_steps > 50 ||
-        policy.max_retries < 0 ||
-        policy.max_retries > 2
-      )
-        throw Error('INVALID_POLICY');
+      const policy = PolicySchema.parse(JSON.parse(policyText));
       const surface = new BrowserSurface(
         () => frame.current!.contentDocument!,
         policy,
@@ -213,7 +208,7 @@ export default function Workbench() {
       } else {
         outcome = await r.replay(suppliedArtifact, params, {
           tenant: opts.tenant || tenant,
-          requireApproval: opts.requireApproval ?? strict,
+          requireApproval: strict || opts.requireApproval === true,
           recoveryModel:
             (opts.assisted ?? assisted) ? await getModel() : undefined,
         });
@@ -223,7 +218,11 @@ export default function Workbench() {
       artifactRef.current = next;
       setResult(outcome);
       latest.current = { result: outcome, events: r.events, artifact: next };
-      return { result: outcome, artifact: next, events: r.events };
+      return structuredClone({
+        result: outcome,
+        artifact: next,
+        events: r.events,
+      });
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Run failed';
       setNotice(message);
@@ -258,15 +257,18 @@ export default function Workbench() {
   }
   useEffect(() => {
     const api = {
-      catalog: () => [catalogDescription],
+      catalog: () => structuredClone([catalogDescription]),
       invoke: async (a: Artifact, p: Params, options: any = {}) =>
         run('replay', a, p, options),
       discover: async (p: Params, options: any = {}) =>
         run('discover', artifactRef.current, p, options),
-      snapshot: () => latest.current,
+      snapshot: () => structuredClone(latest.current),
       resume,
       cancel: () => runner.current?.cancel(),
-      reset,
+      reset: async (...args: Parameters<typeof reset>) => {
+        if (lock.current) throw Error('SESSION_BUSY');
+        return reset(...args);
+      },
     };
     (window as any).relay = api;
     const context = (document as any).modelContext;
@@ -770,10 +772,10 @@ export default function Workbench() {
                           if (f) {
                             if (f.size > 100000) throw Error('File too large');
                             setArtifact(
-                              ArtifactSchema.parse(JSON.parse(await f.text())),
+                              importArtifact(JSON.parse(await f.text())),
                             );
                             setNotice(
-                              'Capability imported as supplied; review provenance before approval.',
+                              'Capability imported as draft. Validate and approve it on this device.',
                             );
                           }
                         } catch (err) {

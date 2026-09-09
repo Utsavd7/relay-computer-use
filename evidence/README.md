@@ -3,6 +3,7 @@
 These are captured executions against the running, nested-frame banking sandbox. All records are synthetic. Identifiers and returned balance values are redacted at the persistence boundary.
 
 - `discover/`: genuine local MLX Qwen3-4B discovery. Five live model decisions complete the search → member → savings account → read workflow. Model exchanges include prompts, responses and usage.
+- `discover-security/`: fresh local MLX discovery after security hardening, with its own artifact and five real model decisions; the original bundled capability is preserved.
 - `browser-discovery/`: independent successful WebGPU Qwen3-4B discovery in Chromium, using five real model decisions and cached device-local weights.
 - `capability.json`: the typed artifact emitted by that discovery, also bundled into the app.
 - `replay/`: the artifact replayed with a different member, with zero model calls.
@@ -15,6 +16,7 @@ These are captured executions against the running, nested-frame banking sandbox.
 - `approved-capability.json`: locally reviewed capability after stability validation.
 - `generated-automation.mjs` and `generated-code-verification.json`: runnable generated invocation and its successful execution.
 - `catalog.json`: the callable capability schema.
+- `security-verification.json`: 12 real-browser checks covering route escapes, unsafe controls, opaque frames, inline script injection, forged review metadata, reference isolation and concurrent reset.
 - `verification.json`: integrated check results; known failure cases are intentionally successful tests of safe behavior.
 - `demo-verification.json`: the refreshed 4K screen recording (1:45), genuine discovery/replay counts, successful handoff, and narration provenance.
 - `color-verification.json`: computed text contrast across the landing page, four workspace views, banking frame, and outcome/intervention states; identical primary button color across the frame boundary.

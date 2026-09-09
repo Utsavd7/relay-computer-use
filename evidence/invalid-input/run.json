@@ -5,7 +5,7 @@
     "step": 0,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "5edc938a-d706-403d-8188-8212a32e7e5c",
+    "run_id": "87af4018-0716-41af-b204-a0debcf6678a",
     "expected": "Unique permitted target, declared checkpoint and matching member",
     "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Member ID\",\n      \"kind\": \"field\",\n      \"state\": \"empty\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    }\n  ]\n}"
   },
@@ -106,14 +106,14 @@
     },
     "approval": {
       "state": "draft",
-      "successful_replays": 0,
+      "successful_replays": 1,
       "failed_replays": 1,
       "reviewer": null
     }
   },
   "events": [
     {
-      "time": "2026-09-09T15:34:43.585Z",
+      "time": "2026-09-09T17:15:18.146Z",
       "type": "run.completed",
       "step": 0,
       "detail": {
@@ -122,7 +122,7 @@
         "step": 0,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "5edc938a-d706-403d-8188-8212a32e7e5c",
+        "run_id": "87af4018-0716-41af-b204-a0debcf6678a",
         "expected": "Unique permitted target, declared checkpoint and matching member",
         "observed": "{\n  \"kind\": \"redacted-ui-snapshot\",\n  \"route\": \"/bank.html\",\n  \"version\": \"1.0\",\n  \"text\": \" NORTHSTAR / CORETraining session · v1.0Member servicesFind a member and review their accounts.Member IDSearch membersSynthetic data only. No real accounts or transactions. \",\n  \"controls\": [\n    {\n      \"ref\": 0,\n      \"name\": \"Member ID\",\n      \"kind\": \"field\",\n      \"state\": \"empty\"\n    },\n    {\n      \"ref\": 1,\n      \"name\": \"Search members\",\n      \"kind\": \"control\"\n    }\n  ]\n}"
       }

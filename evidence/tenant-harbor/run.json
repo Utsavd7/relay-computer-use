@@ -5,7 +5,7 @@
     "step": 5,
     "model_calls": 0,
     "assisted": false,
-    "run_id": "98d16a66-8a1d-46a3-9916-22341b7f1339",
+    "run_id": "48d3f8cc-c52b-4159-8e14-7d80c9cb8c3a",
     "outputs": {
       "balance": "[REDACTED]",
       "currency": "USD"
@@ -108,14 +108,14 @@
     },
     "approval": {
       "state": "draft",
-      "successful_replays": 1,
-      "failed_replays": 0,
+      "successful_replays": 5,
+      "failed_replays": 1,
       "reviewer": null
     }
   },
   "events": [
     {
-      "time": "2026-09-09T15:34:44.989Z",
+      "time": "2026-09-09T17:15:19.569Z",
       "type": "replay.started",
       "step": 0,
       "detail": {
@@ -126,7 +126,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.989Z",
+      "time": "2026-09-09T17:15:19.569Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -139,7 +139,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.989Z",
+      "time": "2026-09-09T17:15:19.569Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -151,7 +151,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.569Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -163,7 +163,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.570Z",
       "type": "action.complete",
       "step": 1,
       "detail": {
@@ -175,7 +175,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.570Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -187,7 +187,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.570Z",
       "type": "action.complete",
       "step": 2,
       "detail": {
@@ -199,7 +199,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.570Z",
       "type": "action.start",
       "step": 3,
       "detail": {
@@ -211,7 +211,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.570Z",
       "type": "action.complete",
       "step": 3,
       "detail": {
@@ -223,7 +223,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.571Z",
       "type": "action.start",
       "step": 4,
       "detail": {
@@ -236,7 +236,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.571Z",
       "type": "action.complete",
       "step": 4,
       "detail": {
@@ -248,7 +248,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.571Z",
       "type": "checkpoint.verified",
       "step": 5,
       "detail": {
@@ -257,7 +257,7 @@
       }
     },
     {
-      "time": "2026-09-09T15:34:44.990Z",
+      "time": "2026-09-09T17:15:19.571Z",
       "type": "run.completed",
       "step": 5,
       "detail": {
@@ -266,7 +266,7 @@
         "step": 5,
         "model_calls": 0,
         "assisted": false,
-        "run_id": "98d16a66-8a1d-46a3-9916-22341b7f1339",
+        "run_id": "48d3f8cc-c52b-4159-8e14-7d80c9cb8c3a",
         "outputs": {
           "balance": "[REDACTED]",
           "currency": "USD"

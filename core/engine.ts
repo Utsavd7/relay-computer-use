@@ -3,6 +3,8 @@ import {
   ArtifactSchema,
   DecisionSchema,
   ParamsSchema,
+  PolicySchema,
+  type Observation,
   defaultPolicy,
   type Action,
   type Artifact,
@@ -89,6 +91,7 @@ export class Runner {
   assisted = false;
   cancelled = false;
   private release?: () => void;
+  private cancellation = new AbortController();
   private context: Intervention['context'] = {};
   private currentStep = 0;
   constructor(
@@ -96,7 +99,9 @@ export class Runner {
     public policy: Policy = defaultPolicy,
     private emit?: (event: Event) => void,
     private onIntervention?: (request: Intervention) => void,
-  ) {}
+  ) {
+    this.policy = PolicySchema.parse(policy);
+  }
   log(type: string, step: number, detail: unknown) {
     const event = {
       time: new Date().toISOString(),
@@ -109,6 +114,7 @@ export class Runner {
   }
   cancel() {
     this.cancelled = true;
+    this.cancellation.abort();
     this.owner = 'stopped';
     this.release?.();
   }
@@ -168,6 +174,42 @@ export class Runner {
     this.log('run.completed', step, result);
     return result;
   }
+  private async decide(
+    model: Model,
+    goal: string,
+    observation: Observation,
+    history: unknown[],
+  ) {
+    this.check();
+    this.modelCalls++;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let onCancel: () => void = () => {};
+    const interrupted = new Promise<never>((_, reject) => {
+      onCancel = () => reject(Error('CANCELLED'));
+      this.cancellation.signal.addEventListener('abort', onCancel, {
+        once: true,
+      });
+      timer = setTimeout(
+        () => reject(Error('MODEL_TIMEOUT')),
+        this.policy.model_timeout_ms ?? 60000,
+      );
+    });
+    try {
+      const decision = await Promise.race([
+        model.decide(
+          String(redact(goal)),
+          redact(observation) as Observation,
+          redact(history) as unknown[],
+        ),
+        interrupted,
+      ]);
+      this.check();
+      return decision;
+    } finally {
+      clearTimeout(timer);
+      this.cancellation.signal.removeEventListener('abort', onCancel);
+    }
+  }
   private async action(action: Action, params: Params, step: number) {
     this.check();
     ActionSchema.parse(action);
@@ -212,15 +254,7 @@ export class Runner {
         try {
           const observation = await this.surface.observe();
           this.log('observation', step, observation);
-          this.modelCalls++;
-          let timer: ReturnType<typeof setTimeout> | undefined;
-          const raw = await Promise.race([
-            model.decide(goal, observation, history),
-            new Promise((_, reject) => {
-              timer = setTimeout(() => reject(Error('MODEL_TIMEOUT')), 60000);
-            }),
-          ]).finally(() => clearTimeout(timer));
-          this.check();
+          const raw = await this.decide(model, goal, observation, history);
           const decision = DecisionSchema.parse(raw);
           this.log('model.decision', step, decision);
           if (decision.action === 'done') {
@@ -421,10 +455,10 @@ export class Runner {
             if (options.recoveryModel && !assistedUsed) {
               assistedUsed = true;
               this.assisted = true;
-              this.modelCalls++;
               const obs = await this.surface.observe();
               const decision = DecisionSchema.parse(
-                await options.recoveryModel.decide(
+                await this.decide(
+                  options.recoveryModel,
                   'Recover this blocked session with one safe action. Do not perform the business operation.',
                   obs,
                   [],
@@ -496,6 +530,21 @@ export class Runner {
       );
     }
   }
+}
+export function reuseLocalReview(supplied: unknown, local: Artifact): Artifact {
+  const incoming = ArtifactSchema.parse(supplied);
+  const contract = ({ approval: _approval, ...rest }: Artifact) =>
+    JSON.stringify(rest);
+  incoming.approval =
+    contract(incoming) === contract(ArtifactSchema.parse(local))
+      ? structuredClone(local.approval)
+      : {
+          state: 'draft',
+          successful_replays: 0,
+          failed_replays: 0,
+          reviewer: null,
+        };
+  return incoming;
 }
 export function recordValidation(artifact: Artifact, result: Result): Artifact {
   const next = structuredClone(artifact);

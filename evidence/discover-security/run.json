@@ -5,127 +5,25 @@
     "step": 4,
     "model_calls": 5,
     "assisted": false,
-    "run_id": "7575a7fd-198c-4638-98fc-d5a5f7141302",
+    "run_id": "edc5c578-2afd-4127-945d-a64b070fd491",
     "outputs": {
       "balance": "[REDACTED]",
       "currency": "USD"
     }
   },
-  "artifact": {
-    "schema_version": "1.0",
-    "id": "get_savings_balance",
-    "version": 1,
-    "name": "Savings balance",
-    "description": "Read a member savings balance through the live banking UI.",
-    "vendor": "relay-core",
-    "supported_versions": [
-      "1.0",
-      "1.1"
-    ],
-    "inputs": {
-      "member_id": "[REDACTED]"
-    },
-    "outputs": {
-      "balance": "[REDACTED]",
-      "currency": "string"
-    },
-    "steps": [
-      {
-        "action": "fill",
-        "target": {
-          "kind": "field",
-          "name": "Member ID"
-        },
-        "input": "member_id"
-      },
-      {
-        "action": "click",
-        "target": {
-          "kind": "control",
-          "name": "Search members"
-        }
-      },
-      {
-        "action": "click",
-        "target": {
-          "kind": "control",
-          "name": "Open member"
-        }
-      },
-      {
-        "action": "click",
-        "target": {
-          "kind": "control",
-          "name": "Savings account"
-        }
-      },
-      {
-        "action": "read",
-        "target": {
-          "kind": "text",
-          "name": "Savings balance"
-        },
-        "output": "balance"
-      }
-    ],
-    "checkpoint": {
-      "text": "Account overview",
-      "identity_field": "Member ID"
-    },
-    "outcomes": [
-      {
-        "text": "Member not found",
-        "code": "MEMBER_NOT_FOUND"
-      },
-      {
-        "text": "Validation error",
-        "code": "VALIDATION_ERROR"
-      }
-    ],
-    "recoveries": [
-      {
-        "text": "Temporary connection error",
-        "target": {
-          "kind": "control",
-          "name": "Retry load"
-        },
-        "max_attempts": 2
-      },
-      {
-        "text": "Service notice",
-        "target": {
-          "kind": "control",
-          "name": "Dismiss notice"
-        },
-        "max_attempts": 1
-      }
-    ],
-    "provenance": {
-      "kind": "llm-discovery",
-      "model": "Qwen3-4B-q4f16_1-MLC",
-      "created_at": "2026-09-09T17:16:07.367Z",
-      "run_id": "7575a7fd-198c-4638-98fc-d5a5f7141302"
-    },
-    "approval": {
-      "state": "draft",
-      "successful_replays": 0,
-      "failed_replays": 0,
-      "reviewer": null
-    }
-  },
   "events": [
     {
-      "time": "2026-09-09T17:15:56.688Z",
+      "time": "2026-09-09T17:16:27.007Z",
       "type": "discovery.started",
       "step": 0,
       "detail": {
-        "model": "Qwen3-4B-q4f16_1-MLC",
+        "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
         "goal": "Look up this member and read their current savings balance.",
         "route": "/bank.html"
       }
     },
     {
-      "time": "2026-09-09T17:15:56.705Z",
+      "time": "2026-09-09T17:16:27.010Z",
       "type": "observation",
       "step": 0,
       "detail": {
@@ -146,18 +44,18 @@
       }
     },
     {
-      "time": "2026-09-09T17:15:58.647Z",
+      "time": "2026-09-09T17:16:28.709Z",
       "type": "model.decision",
       "step": 0,
       "detail": {
         "action": "fill",
         "target": 0,
         "input": "member_id",
-        "reason": "Fill in the Member ID to proceed with the search."
+        "reason": "The Member ID field must be filled before searching for a member to view their savings balance."
       }
     },
     {
-      "time": "2026-09-09T17:15:58.647Z",
+      "time": "2026-09-09T17:16:28.709Z",
       "type": "action.start",
       "step": 0,
       "detail": {
@@ -170,7 +68,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:15:58.650Z",
+      "time": "2026-09-09T17:16:28.710Z",
       "type": "action.complete",
       "step": 0,
       "detail": {
@@ -182,7 +80,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:15:58.852Z",
+      "time": "2026-09-09T17:16:28.912Z",
       "type": "observation",
       "step": 1,
       "detail": {
@@ -203,17 +101,17 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:00.410Z",
+      "time": "2026-09-09T17:16:30.142Z",
       "type": "model.decision",
       "step": 1,
       "detail": {
         "action": "click",
         "target": 1,
-        "reason": "Click Search members to look up the member and read their current savings balance."
+        "reason": "The user needs to find a member to view their savings balance, so clicking 'Search members' is the next logical step."
       }
     },
     {
-      "time": "2026-09-09T17:16:00.410Z",
+      "time": "2026-09-09T17:16:30.142Z",
       "type": "action.start",
       "step": 1,
       "detail": {
@@ -225,7 +123,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:00.416Z",
+      "time": "2026-09-09T17:16:30.143Z",
       "type": "action.complete",
       "step": 1,
       "detail": {
@@ -237,7 +135,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:00.619Z",
+      "time": "2026-09-09T17:16:30.345Z",
       "type": "observation",
       "step": 2,
       "detail": {
@@ -252,17 +150,17 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:03.473Z",
+      "time": "2026-09-09T17:16:31.607Z",
       "type": "model.decision",
       "step": 2,
       "detail": {
         "action": "click",
         "target": 0,
-        "reason": "Click Open member to proceed with looking up the member's savings balance."
+        "reason": "Clicking 'Open member' will load the member's details, including their current savings balance."
       }
     },
     {
-      "time": "2026-09-09T17:16:03.473Z",
+      "time": "2026-09-09T17:16:31.607Z",
       "type": "action.start",
       "step": 2,
       "detail": {
@@ -274,7 +172,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:03.473Z",
+      "time": "2026-09-09T17:16:31.607Z",
       "type": "action.complete",
       "step": 2,
       "detail": {
@@ -286,7 +184,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:03.674Z",
+      "time": "2026-09-09T17:16:31.808Z",
       "type": "observation",
       "step": 3,
       "detail": {
@@ -301,17 +199,17 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:05.313Z",
+      "time": "2026-09-09T17:16:32.981Z",
       "type": "model.decision",
       "step": 3,
       "detail": {
         "action": "click",
         "target": 0,
-        "reason": "Click Savings account to proceed with the member's savings balance lookup."
+        "reason": "Clicking the Savings account option selects the account type to view the current savings balance."
       }
     },
     {
-      "time": "2026-09-09T17:16:05.313Z",
+      "time": "2026-09-09T17:16:32.981Z",
       "type": "action.start",
       "step": 3,
       "detail": {
@@ -323,7 +221,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:05.313Z",
+      "time": "2026-09-09T17:16:32.981Z",
       "type": "action.complete",
       "step": 3,
       "detail": {
@@ -335,7 +233,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:05.515Z",
+      "time": "2026-09-09T17:16:33.183Z",
       "type": "observation",
       "step": 4,
       "detail": {
@@ -355,17 +253,17 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:07.366Z",
+      "time": "2026-09-09T17:16:34.761Z",
       "type": "model.decision",
       "step": 4,
       "detail": {
         "action": "read",
         "target": 1,
-        "reason": "Read the savings balance to look up the member's current savings."
+        "reason": "The user's goal is to look up the member and read their current savings balance, and the savings balance field is already visible in the account overview."
       }
     },
     {
-      "time": "2026-09-09T17:16:07.366Z",
+      "time": "2026-09-09T17:16:34.761Z",
       "type": "action.start",
       "step": 4,
       "detail": {
@@ -378,7 +276,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:07.367Z",
+      "time": "2026-09-09T17:16:34.761Z",
       "type": "action.complete",
       "step": 4,
       "detail": {
@@ -390,7 +288,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:07.367Z",
+      "time": "2026-09-09T17:16:34.762Z",
       "type": "checkpoint.verified",
       "step": 4,
       "detail": {
@@ -399,7 +297,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:07.367Z",
+      "time": "2026-09-09T17:16:34.762Z",
       "type": "artifact.created",
       "step": 4,
       "detail": {
@@ -408,7 +306,7 @@
       }
     },
     {
-      "time": "2026-09-09T17:16:07.367Z",
+      "time": "2026-09-09T17:16:34.762Z",
       "type": "run.completed",
       "step": 4,
       "detail": {
@@ -417,7 +315,7 @@
         "step": 4,
         "model_calls": 5,
         "assisted": false,
-        "run_id": "7575a7fd-198c-4638-98fc-d5a5f7141302",
+        "run_id": "edc5c578-2afd-4127-945d-a64b070fd491",
         "outputs": {
           "balance": "[REDACTED]",
           "currency": "USD"

@@ -5,7 +5,7 @@
 | 3.1 Goal-driven LLM loop     | Runner.discover + local Model adapter; real nested-frame UI            | evidence/discover/model-exchanges.json and run.json        |
 | 3.2 Typed versioned artifact | Zod ArtifactSchema, parameter binding, output schema and checkpoint    | evidence/capability.json                                   |
 | 3.3 Deterministic replay     | Runner.replay, output/identity validation, explicit outcomes           | evidence/replay, not-found, slow, transient, unknown-error |
-| 3.4 Safety                   | Route/action allowlist, unique matches, risky-action block, redaction  | unit tests; evidence/risky-action-blocked                  |
+| 3.4 Safety                   | Route/action allowlist, unique matches, risky-action block, redaction  | unit tests; evidence/risky-action-blocked; evidence/security-verification.json                  |
 | 3.5 Observability            | Redacted structured events and failure snapshots; CLI screenshots      | evidence directories                                       |
 | 3.6 Human control            | Pause, same-session manual interaction, capture, resume, abort         | evidence/handoff and aborted                               |
 | 3.7 Heterogeneity/scale      | Surface interface, nested frames, vendor versioning and tenant binding | REPORT.md; evidence/tenant-harbor                          |
@@ -41,3 +41,5 @@ Rechecked against all ten pages of Assignment A on 9 September 2026. The numbere
 | Public repository and email handover instructions | `docs/HANDOVER.md`: repository URL on its own line, send from the application email, no ZIP; email remains a draft |
 
 The PDF recommends choosing at most one or two optional extensions. All six are included following the additional request for every optional item; each reuses the same executor and has evidence. The design-only allowances in the brief are documented honestly rather than presented as implemented infrastructure. The video, visual identity and hosted landing page supplement the required code and evidence.
+
+Security hardening and exact reproduction commands are documented in [SECURITY.md](SECURITY.md): strict policy bounds, exact frame routes, explicit control allowlists, draft imports, local review isolation, model cancellation/timeouts, privacy filtering, CLI bridge restrictions and static CSP.

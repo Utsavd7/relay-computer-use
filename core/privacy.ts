@@ -5,7 +5,7 @@ export function redact(value: unknown): unknown {
     return Object.fromEntries(
       Object.entries(value).map(([k, v]) => [
         k,
-        /^(?:password|secret|token|access_token|api_key|credentials?|member_id|balance|email|authorization)$/i.test(
+        /^(?:password|secret|token|access_token|refresh_token|api_key|apiKey|client_secret|cookie|set-cookie|credentials?|member_id|balance|email|authorization)$/i.test(
           k,
         )
           ? '[REDACTED]'
@@ -17,6 +17,11 @@ export function redact(value: unknown): unknown {
       .replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, '[EMAIL]')
       .replace(/\b\d{5,}\b/g, '[ID]')
       .replace(/(?:USD|\$)\s*[\d,.]+/g, '[AMOUNT]')
-      .replace(/Bearer\s+\S+/gi, '[TOKEN]');
+      .replace(/(?:Bearer|Basic)\s+\S+/gi, '[TOKEN]')
+      .replace(
+        /\b(?:password|api[_-]?key|access[_-]?token|refresh[_-]?token|client[_-]?secret)\s*[:=]\s*(?:"[^"\n]*"|'[^'\n]*'|[^\s,;]+)/gi,
+        '[SECRET]',
+      )
+      .replace(/https?:\/\/[^\s/@]+:[^\s/@]+@/gi, 'https://[CREDENTIALS]@');
   return value;
 }

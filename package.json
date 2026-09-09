@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vite build --config vite.static.config.ts",
+    "build": "vite build --config vite.static.config.ts && node scripts/secure-static.mjs",
     "start": "vite preview --config vite.static.config.ts",
     "lint": "oxlint",
     "format": "oxfmt",
@@ -16,7 +16,7 @@
     "discover": "tsx scripts/cli.ts discover",
     "replay": "tsx scripts/cli.ts replay",
     "test:e2e": "tsx scripts/verify.ts",
-    "build:static": "vite build --config vite.static.config.ts",
+    "build:static": "vite build --config vite.static.config.ts && node scripts/secure-static.mjs",
     "demo:record": "tsx scripts/record-demo.ts"
   },
   "dependencies": {
@@ -66,5 +66,8 @@
     "vite": "^8.2.2",
     "wrangler": "^4.130.0"
   },
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "sharp": "0.35.4"
+  }
 }

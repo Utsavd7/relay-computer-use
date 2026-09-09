@@ -25,12 +25,15 @@ export const ActionSchema = z.discriminatedUnion('action', [
 export const ArtifactSchema = z
   .object({
     schema_version: z.literal('1.0'),
-    id: z.string().regex(/^[a-z][a-z0-9_-]+$/),
+    id: z
+      .string()
+      .max(100)
+      .regex(/^[a-z][a-z0-9_-]+$/),
     version: z.number().int().positive(),
-    name: z.string(),
-    description: z.string(),
+    name: z.string().min(1).max(120),
+    description: z.string().max(500),
     vendor: z.literal('relay-core'),
-    supported_versions: z.array(z.string()),
+    supported_versions: z.array(z.string().min(1).max(30)).min(1).max(10),
     inputs: z.object({
       member_id: z.object({
         type: z.literal('string'),
@@ -47,25 +50,36 @@ export const ArtifactSchema = z
       text: z.literal('Account overview'),
       identity_field: z.literal('Member ID'),
     }),
-    outcomes: z.array(z.object({ text: z.string(), code: z.string() })),
-    recoveries: z.array(
-      z.object({
-        text: z.string(),
-        target: LocatorSchema,
-        max_attempts: z.number().int().min(1).max(2),
-      }),
-    ),
+    outcomes: z
+      .array(
+        z
+          .object({
+            text: z.string().min(1).max(120),
+            code: z.string().regex(/^[A-Z][A-Z0-9_]{0,79}$/),
+          })
+          .strict(),
+      )
+      .max(10),
+    recoveries: z
+      .array(
+        z.object({
+          text: z.string().min(1).max(120),
+          target: LocatorSchema,
+          max_attempts: z.number().int().min(1).max(2),
+        }),
+      )
+      .max(10),
     provenance: z.object({
       kind: z.enum(['llm-discovery', 'authored-example']),
-      model: z.string(),
-      created_at: z.string(),
-      run_id: z.string(),
+      model: z.string().max(150),
+      created_at: z.string().max(50),
+      run_id: z.string().max(100),
     }),
     approval: z.object({
       state: z.enum(['draft', 'approved']),
       successful_replays: z.number().int().nonnegative(),
       failed_replays: z.number().int().nonnegative(),
-      reviewer: z.string().nullable(),
+      reviewer: z.string().max(100).nullable(),
     }),
   })
   .strict();
@@ -102,14 +116,38 @@ export type Result = {
   assisted: boolean;
   run_id: string;
 };
-export type Policy = {
-  routes: string[];
-  actions: Action['action'][];
-  risky: 'block';
-  timeout_ms: number;
-  max_steps: number;
-  max_retries: number;
+export const safeControls = {
+  click: [
+    'Search members',
+    'Find member',
+    'Open member',
+    'Savings account',
+    'Back to search',
+    'Retry load',
+    'Dismiss notice',
+    'Restore session',
+  ],
+  fill: ['Member ID'],
+  read: ['Savings balance'],
 };
+export const PolicySchema = z
+  .object({
+    routes: z
+      .array(z.enum(['/bank.html', '/bank-frame.html', '/bank', '/bank-frame']))
+      .min(1)
+      .max(4),
+    actions: z
+      .array(z.enum(['click', 'fill', 'read']))
+      .min(1)
+      .max(3),
+    risky: z.literal('block'),
+    timeout_ms: z.number().int().min(1).max(30000),
+    max_steps: z.number().int().min(1).max(50),
+    max_retries: z.number().int().min(0).max(2),
+    model_timeout_ms: z.number().int().min(1).max(60000).default(60000),
+  })
+  .strict();
+export type Policy = z.input<typeof PolicySchema>;
 export const defaultPolicy: Policy = {
   routes: ['/bank.html', '/bank-frame.html', '/bank', '/bank-frame'],
   actions: ['click', 'fill', 'read'],
@@ -145,3 +183,15 @@ export const DecisionSchema = z.object({
   input: z.literal('member_id').optional(),
   reason: z.string().max(250),
 });
+
+/** File imports are untrusted; validation and approval must be earned on this device. */
+export function importArtifact(value: unknown): Artifact {
+  const artifact = ArtifactSchema.parse(value);
+  artifact.approval = {
+    state: 'draft',
+    successful_replays: 0,
+    failed_replays: 0,
+    reviewer: null,
+  };
+  return artifact;
+}
