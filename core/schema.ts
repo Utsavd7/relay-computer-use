@@ -111,7 +111,7 @@ export type Policy = {
   max_retries: number;
 };
 export const defaultPolicy: Policy = {
-  routes: ['/bank.html', '/bank-frame.html'],
+  routes: ['/bank.html', '/bank-frame.html', '/bank', '/bank-frame'],
   actions: ['click', 'fill', 'read'],
   risky: 'block',
   timeout_ms: 6000,
